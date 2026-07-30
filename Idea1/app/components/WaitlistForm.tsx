@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { attribution } from "@/lib/attribution";
+import { checkEmail } from "@/lib/email";
 import { track } from "@/lib/analytics";
 import styles from "./waitlist-form.module.css";
 
@@ -25,18 +26,23 @@ export default function WaitlistForm({
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [error, setError] = useState("");
+  const [fix, setFix] = useState("");
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "sending") return;
 
-    if (!email.trim()) {
-      setError("Pop your email in first.");
+    const check = checkEmail(email);
+    if (!check.ok) {
+      setError(check.error);
+      setFix(check.suggestion ?? "");
+      void track("waitlist_error", { page, reason: "invalid_email" });
       return;
     }
 
     setStatus("sending");
     setError("");
+    setFix("");
 
     const attr = attribution();
 
@@ -45,7 +51,7 @@ export default function WaitlistForm({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: email.trim(),
+          email: check.email,
           answer: answer.trim(),
           page,
           played,
@@ -61,6 +67,7 @@ export default function WaitlistForm({
         const b = await res.json().catch(() => ({}));
         void track("waitlist_error", { page, reason: b.error ?? "unknown" });
         setError(b.error ?? "That didn't work. Try again?");
+        setFix(b.suggestion ?? "");
         setStatus("idle");
         return;
       }
@@ -98,7 +105,13 @@ export default function WaitlistForm({
           placeholder="your email"
           aria-label="Your email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (error) {
+              setError("");
+              setFix("");
+            }
+          }}
           required
         />
         <button
@@ -125,7 +138,25 @@ export default function WaitlistForm({
 
       {error ? (
         <p className={styles.error} role="alert">
-          {error}
+          {fix ? (
+            <>
+              Did you mean{" "}
+              <button
+                type="button"
+                className={styles.fixBtn}
+                onClick={() => {
+                  setEmail(fix);
+                  setError("");
+                  setFix("");
+                }}
+              >
+                {fix}
+              </button>
+              ?
+            </>
+          ) : (
+            error
+          )}
         </p>
       ) : (
         <p className={styles.fine}>One email when it&rsquo;s ready. Nothing else.</p>

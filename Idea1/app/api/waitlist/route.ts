@@ -1,6 +1,5 @@
 import { saveSignup, summary } from "@/lib/store";
-
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { checkEmail } from "@/lib/email";
 
 function str(v: unknown, max = 2000) {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
@@ -20,13 +19,14 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const email = str(payload.email, 320).toLowerCase();
-  if (!EMAIL.test(email)) {
+  const check = checkEmail(payload.email);
+  if (!check.ok) {
     return Response.json(
-      { error: "That doesn't look like an email address." },
+      { error: check.error, suggestion: check.suggestion },
       { status: 400 }
     );
   }
+  const email = check.email;
 
   const answer = str(payload.answer);
   const ua = request.headers.get("user-agent") ?? "";

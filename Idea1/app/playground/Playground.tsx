@@ -165,86 +165,115 @@ export default function Playground() {
           ))}
         </div>
 
-        {phase === "idle" ? (
-          <div className={styles.empty}>
-            <span className={styles.emptyIcon} aria-hidden="true">
-              ▶
-            </span>
-            <p>Pick one above to build it</p>
-          </div>
-        ) : (
-          <div className={styles.console}>
-            <div className={styles.promptBar}>
-              <span className={styles.who}>asked for</span>
-              <span className={styles.typed}>
-                {typed}
-                {phase === "building" && <i className={styles.caret} />}
-              </span>
-            </div>
+        <div className={styles.split}>
+          {/* left: what was asked for, and what to change */}
+          <aside className={styles.left}>
+            <span className={styles.leftHead}>Ask for it</span>
 
-            <div className={styles.screen}>
-              {phase === "building" ? (
-                <div className={styles.building}>
-                  <span className={styles.dots}>
-                    <i />
-                    <i />
-                    <i />
-                  </span>
-                  writing the code
-                </div>
+            <div className={styles.prompt}>
+              {phase === "idle" ? (
+                <span className={styles.promptIdle}>
+                  pick a game above and watch it get built
+                </span>
               ) : (
-                <>
-                  <MiniGame variant={build.id} knobs={knobs} onScore={setScore} />
-                  <span className={styles.scoreTag}>{score}</span>
-                </>
+                <span className={styles.typed}>
+                  {typed}
+                  {phase === "building" && <i className={styles.caret} />}
+                </span>
               )}
             </div>
 
-            <div className={styles.bar}>
-              <span className={styles.file}>{build.file}</span>
-              <span className={styles.hint}>{build.hint}</span>
-            </div>
-          </div>
-        )}
-
-        {phase === "ready" && (
-          <section className={styles.panel}>
-            <div className={styles.panelHead}>
-              <h2 className={styles.panelH}>Now change it</h2>
-              <button
-                type="button"
-                className={styles.reset}
-                onClick={() => setKnobs(build.knobs)}
-              >
-                put it back
-              </button>
-            </div>
-
-            <div className={styles.knobGrid}>
-              {KNOBS.map((k) => (
-                <div key={k.key} className={`${styles.knob} ${styles[k.tint]}`}>
-                  <label className={styles.knobTop} htmlFor={`k-${k.key}`}>
-                    <span className={styles.knobName}>{k.name}</span>
-                    <span className={styles.knobVal}>{knobs[k.key]}</span>
-                  </label>
-                  <input
-                    id={`k-${k.key}`}
-                    className={styles.range}
-                    type="range"
-                    min={k.min}
-                    max={k.max}
-                    step={k.step}
-                    value={knobs[k.key]}
-                    onChange={(e) => change(k.key, Number(e.target.value))}
-                  />
-                  <code className={styles.knobCode}>
-                    {k.code} = {knobs[k.key]}
-                  </code>
+            {phase === "ready" && (
+              <>
+                <div className={styles.replyRow}>
+                  <span className={styles.replyDot} aria-hidden="true" />
+                  <p className={styles.reply}>
+                    Built it. Everything below is a real value in{" "}
+                    <code>{build.file}</code>, change one and it happens straight
+                    away.
+                  </p>
                 </div>
-              ))}
+
+                <div className={styles.knobList}>
+                  {KNOBS.map((k) => (
+                    <div key={k.key} className={`${styles.knob} ${styles[k.tint]}`}>
+                      <label className={styles.knobTop} htmlFor={`k-${k.key}`}>
+                        <span className={styles.knobName}>{k.name}</span>
+                        <span className={styles.knobVal}>{knobs[k.key]}</span>
+                      </label>
+                      <input
+                        id={`k-${k.key}`}
+                        className={styles.range}
+                        type="range"
+                        min={k.min}
+                        max={k.max}
+                        step={k.step}
+                        value={knobs[k.key]}
+                        onChange={(e) => change(k.key, Number(e.target.value))}
+                      />
+                      <code className={styles.knobCode}>
+                        {k.code} = {knobs[k.key]}
+                      </code>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className={styles.reset}
+                  onClick={() => setKnobs(build.knobs)}
+                >
+                  put it back
+                </button>
+              </>
+            )}
+          </aside>
+
+          {/* right: the thing itself */}
+          <div className={styles.right}>
+            <div className={styles.console}>
+              <div className={styles.consoleBar}>
+                <span className={styles.lights} aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span className={styles.file}>
+                  {phase === "idle" ? "nothing running" : build.file}
+                </span>
+                {phase === "ready" && (
+                  <span className={styles.scoreTag}>{score}</span>
+                )}
+              </div>
+
+              <div className={styles.screen}>
+                {phase === "idle" && (
+                  <div className={styles.empty}>
+                    <span className={styles.emptyIcon} aria-hidden="true">
+                      &#9654;
+                    </span>
+                    <p>Pick a game to build it</p>
+                  </div>
+                )}
+                {phase === "building" && (
+                  <div className={styles.building}>
+                    <span className={styles.dots}>
+                      <i />
+                      <i />
+                      <i />
+                    </span>
+                    writing the code
+                  </div>
+                )}
+                {phase === "ready" && (
+                  <MiniGame variant={build.id} knobs={knobs} onScore={setScore} />
+                )}
+              </div>
             </div>
-          </section>
-        )}
+
+            {phase === "ready" && <p className={styles.hint}>{build.hint}</p>}
+          </div>
+        </div>
 
         {showAsk && (
           <section className={styles.ask}>
