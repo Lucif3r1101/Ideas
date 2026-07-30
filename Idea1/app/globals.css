@@ -1,0 +1,82 @@
+/*
+ * Deliberately light-only. The hero paints its own bright sky from the
+ * selected project, so flipping the lower half to dark just split the page
+ * in two. A kids' product should look the same for everyone.
+ */
+:root {
+  color-scheme: light;
+
+  --sky: #eaf3ff;
+  --card: #ffffff;
+  --cream: #fff7e6;
+
+  --ink: #24223d;
+  --ink-2: #45426b;
+  --muted: #6f6c93;
+  --muted-2: #9d9abb;
+
+  --grape: #6c4ce0;
+  --grape-dark: #4f34b8;
+  --sun: #ffc633;
+  --sun-dark: #dc9f0d;
+  --coral: #ff6b5a;
+  --coral-dark: #d94a3a;
+  --mint: #2dc98f;
+  --mint-dark: #1ba272;
+
+  --line: #e2e6f2;
+
+  --display: var(--font-display), "Trebuchet MS", sans-serif;
+  --body: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --r-sm: 12px;
+  --r: 18px;
+  --r-lg: 26px;
+
+  --gutter: 22px;
+  --max: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f2f4fd;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--grape);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

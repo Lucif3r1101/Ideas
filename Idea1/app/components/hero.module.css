@@ -1,0 +1,123 @@
+.sky {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(var(--sky-top) 0%, var(--sky-bot) 100%);
+  overflow: hidden;
+  padding-bottom: 320px;
+  transition: background 0.55s ease;
+}
+
+.brand {
+  position: relative;
+  z-index: 2;
+  padding: 24px 30px 0;
+  font-family: var(--display);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--brand);
+  transition: color 0.55s ease;
+}
+
+.stage {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 34px 30px 0;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 42px;
+  align-items: center;
+}
+
+.h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  margin: 0 0 18px;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.l1,
+.l2 {
+  font-size: clamp(46px, 6.4vw, 84px);
+  transition: color 0.55s ease, text-shadow 0.55s ease;
+}
+
+.l1 {
+  transform: rotate(-2deg);
+  color: var(--l1);
+  text-shadow: 0 5px 0 var(--l1-shadow), 0 12px 24px rgba(14, 40, 70, 0.26);
+}
+
+.l2 {
+  transform: rotate(1.2deg);
+  color: var(--l2);
+  text-shadow: 0 5px 0 var(--l2-shadow), 0 12px 24px rgba(14, 40, 70, 0.26);
+}
+
+.lede {
+  margin: 0 0 28px;
+  max-width: 34ch;
+  font-size: clamp(16.5px, 1.8vw, 19px);
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--lede);
+  transition: color 0.55s ease;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.ws {
+  min-width: 0;
+}
+
+.world {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 960px) {
+  .sky {
+    padding-bottom: 250px;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 26px;
+  }
+
+  .lede,
+  .form {
+    max-width: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .sky {
+    padding-bottom: 200px;
+  }
+
+  .brand {
+    padding: 20px 22px 0;
+    font-size: 22px;
+  }
+
+  .stage {
+    padding: 22px 22px 0;
+  }
+}

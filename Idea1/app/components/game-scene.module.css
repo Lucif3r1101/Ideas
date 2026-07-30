@@ -1,0 +1,125 @@
+.scene {
+  display: block;
+  width: 100%;
+  height: 380px;
+}
+
+/* inside the workspace screen */
+.compact {
+  height: 196px;
+}
+
+.hero {
+  animation: trot 0.42s ease-in-out infinite;
+  transform-origin: 500px 220px;
+}
+
+.flame {
+  animation: flicker 0.16s ease-in-out infinite alternate;
+  transform-origin: 460px 194px;
+}
+
+@keyframes flicker {
+  from {
+    transform: scaleX(0.86);
+    opacity: 0.85;
+  }
+  to {
+    transform: scaleX(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes trot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-11px);
+  }
+}
+
+.legFront {
+  animation: legF 0.42s ease-in-out infinite;
+  transform-origin: 528px 232px;
+}
+
+.legBack {
+  animation: legB 0.42s ease-in-out infinite;
+  transform-origin: 472px 232px;
+}
+
+@keyframes legF {
+  0%,
+  100% {
+    transform: rotate(22deg);
+  }
+  50% {
+    transform: rotate(-22deg);
+  }
+}
+
+@keyframes legB {
+  0%,
+  100% {
+    transform: rotate(-22deg);
+  }
+  50% {
+    transform: rotate(22deg);
+  }
+}
+
+.tail {
+  animation: wag 0.3s ease-in-out infinite;
+  transform-origin: 448px 196px;
+}
+
+@keyframes wag {
+  0%,
+  100% {
+    transform: rotate(-14deg);
+  }
+  50% {
+    transform: rotate(16deg);
+  }
+}
+
+.coins {
+  animation: bob 1.5s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-13px);
+  }
+}
+
+.dust {
+  animation: puff 0.42s ease-out infinite;
+}
+
+@keyframes puff {
+  0% {
+    opacity: 0.55;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-26px);
+  }
+}
+
+@media (max-width: 700px) {
+  .scene {
+    height: 250px;
+  }
+
+  .compact {
+    height: 168px;
+  }
+}
