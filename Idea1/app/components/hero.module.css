@@ -77,6 +77,22 @@
   max-width: 400px;
 }
 
+.try {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--lede);
+  opacity: 0.85;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: opacity 0.15s ease, color 0.55s ease;
+}
+
+.try:hover {
+  opacity: 1;
+}
+
 .ws {
   min-width: 0;
 }

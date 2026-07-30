@@ -77,6 +77,10 @@ export default function Hero() {
           <div className={styles.form}>
             <WaitlistForm id="top" />
           </div>
+
+          <a className={styles.try} href="/playground">
+            or try it yourself first
+          </a>
         </div>
 
         <div className={styles.ws}>

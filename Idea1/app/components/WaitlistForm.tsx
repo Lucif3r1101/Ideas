@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./waitlist-form.module.css";
 
-const PAGE = "kids";
-
 type Tracking = {
   utm_source: string;
   utm_medium: string;
@@ -22,7 +20,13 @@ const EMPTY: Tracking = {
   referrer: "",
 };
 
-export default function WaitlistForm({ id }: { id: string }) {
+export default function WaitlistForm({
+  id,
+  page = "kids",
+}: {
+  id: string;
+  page?: string;
+}) {
   const router = useRouter();
   const tracking = useRef<Tracking>(EMPTY);
   const [email, setEmail] = useState("");
@@ -61,7 +65,7 @@ export default function WaitlistForm({ id }: { id: string }) {
         body: JSON.stringify({
           email: email.trim(),
           answer: answer.trim(),
-          page: PAGE,
+          page,
           ...tracking.current,
         }),
       });
