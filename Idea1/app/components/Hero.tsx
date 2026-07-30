@@ -59,7 +59,15 @@ export default function Hero() {
         } as React.CSSProperties
       }
     >
-      <span className={styles.brand}>Tinker</span>
+      <nav className={styles.nav}>
+        <span className={styles.brand}>Tinker</span>
+        <a className={styles.playBtn} href="/playground">
+          <span className={styles.playIcon} aria-hidden="true">
+            ▶
+          </span>
+          Playground
+        </a>
+      </nav>
 
       <div className={styles.stage}>
         <div className={styles.copy}>
@@ -77,10 +85,6 @@ export default function Hero() {
           <div className={styles.form}>
             <WaitlistForm id="top" />
           </div>
-
-          <a className={styles.try} href="/playground">
-            or try it yourself first
-          </a>
         </div>
 
         <div className={styles.ws}>

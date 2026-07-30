@@ -9,37 +9,49 @@ import styles from "./playground.module.css";
 
 type Build = {
   id: Variant;
+  short: string;
   prompt: string;
   file: string;
-  label: string;
   hint: string;
   knobs: Knobs;
+  sky: string;
+  skyBot: string;
+  ink: string;
 };
 
 const BUILDS: Build[] = [
   {
     id: "dog",
+    short: "Dog and coins",
     prompt: "a game where my dog runs and collects coins",
     file: "dog.js",
-    label: "dog game",
-    hint: "Tap the game or press space to make him jump.",
+    hint: "Tap the game or hit space to jump",
     knobs: { jump: 9, speed: 3, coins: 4, gravity: 0.45 },
+    sky: "#7EC8FF",
+    skyBot: "#D6F0FF",
+    ink: "#10466F",
   },
   {
     id: "rocket",
+    short: "Rocket in space",
     prompt: "a rocket flying past stars picking up crystals",
     file: "rocket.py",
-    label: "space rocks",
-    hint: "Tap or press space to boost upwards.",
+    hint: "Tap or hit space to boost",
     knobs: { jump: 11, speed: 4.5, coins: 6, gravity: 0.5 },
+    sky: "#2B1D5E",
+    skyBot: "#6E4CB8",
+    ink: "#E4D9FF",
   },
   {
     id: "cat",
+    short: "Cat and fish",
     prompt: "a cat running around catching fish",
     file: "cat.js",
-    label: "cat maze",
-    hint: "Tap or press space to pounce.",
+    hint: "Tap or hit space to pounce",
     knobs: { jump: 8, speed: 3.5, coins: 5, gravity: 0.38 },
+    sky: "#FFB88C",
+    skyBot: "#FFE8D2",
+    ink: "#7A3418",
   },
 ];
 
@@ -50,11 +62,12 @@ const KNOBS: {
   min: number;
   max: number;
   step: number;
+  tint: string;
 }[] = [
-  { key: "jump", name: "How high it jumps", code: "jumpPower", min: 5, max: 16, step: 1 },
-  { key: "speed", name: "How fast it moves", code: "speed", min: 1, max: 9, step: 0.5 },
-  { key: "coins", name: "How many to collect", code: "coinCount", min: 1, max: 12, step: 1 },
-  { key: "gravity", name: "How heavy it feels", code: "gravity", min: 0.2, max: 0.9, step: 0.05 },
+  { key: "jump", name: "Jump height", code: "jumpPower", min: 5, max: 16, step: 1, tint: "sun" },
+  { key: "speed", name: "Speed", code: "speed", min: 1, max: 9, step: 0.5, tint: "coral" },
+  { key: "coins", name: "How many", code: "coinCount", min: 1, max: 12, step: 1, tint: "grape" },
+  { key: "gravity", name: "Heaviness", code: "gravity", min: 0.2, max: 0.9, step: 0.05, tint: "mint" },
 ];
 
 type Phase = "idle" | "building" | "ready";
@@ -66,8 +79,6 @@ export default function Playground() {
   const [score, setScore] = useState(0);
   const [typed, setTyped] = useState("");
   const [tweaks, setTweaks] = useState(0);
-  const [custom, setCustom] = useState("");
-  const [noted, setNoted] = useState(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
@@ -79,18 +90,16 @@ export default function Playground() {
     setKnobs(b.knobs);
     setScore(0);
     setTweaks(0);
-    setNoted(false);
     setPhase("building");
     setTyped("");
 
-    // type the prompt out, then "build" it
     b.prompt.split("").forEach((_, i) => {
       timers.current.push(
-        setTimeout(() => setTyped(b.prompt.slice(0, i + 1)), 18 * i)
+        setTimeout(() => setTyped(b.prompt.slice(0, i + 1)), 16 * i)
       );
     });
     timers.current.push(
-      setTimeout(() => setPhase("ready"), 18 * b.prompt.length + 900)
+      setTimeout(() => setPhase("ready"), 16 * b.prompt.length + 850)
     );
   }
 
@@ -100,27 +109,35 @@ export default function Playground() {
   }
 
   const showAsk = tweaks >= 3 || score >= 3;
+  const dark = build.id === "rocket";
 
   return (
-    <main className={styles.page}>
-      <header className={styles.top}>
+    <main
+      className={`${styles.page} ${dark ? styles.onDark : ""}`}
+      style={
+        {
+          "--pg-sky": build.sky,
+          "--pg-sky-bot": build.skyBot,
+          "--pg-ink": build.ink,
+        } as React.CSSProperties
+      }
+    >
+      <nav className={styles.nav}>
         <Link href="/" className={styles.brand}>
           Tinker
         </Link>
         <span className={styles.tag}>Playground</span>
-      </header>
+      </nav>
 
-      <section className={styles.intro}>
-        <h1 className={styles.h1}>Have a go yourself.</h1>
-        <p className={styles.sub}>
-          This is a cut down version of what a kid gets. Pick something to build,
-          play it, then change the numbers and watch the game change. That last
-          bit is the whole point.
-        </p>
-      </section>
+      <div className={styles.inner}>
+        <header className={styles.head}>
+          <h1 className={styles.h1}>Have a go yourself.</h1>
+          <p className={styles.sub}>
+            Pick a game, play it, then drag the sliders. They are the real values
+            in the file, so the game changes as you move them.
+          </p>
+        </header>
 
-      <section className={styles.picker}>
-        <span className={styles.pickLabel}>Ask for a game</span>
         <div className={styles.chips}>
           {BUILDS.map((b) => (
             <button
@@ -131,133 +148,112 @@ export default function Playground() {
               }`}
               onClick={() => start(b)}
             >
-              {b.prompt}
+              <span className={styles.chipDot} data-id={b.id} aria-hidden="true" />
+              {b.short}
             </button>
           ))}
         </div>
 
-        <div className={styles.customRow}>
-          <input
-            className={styles.customInput}
-            value={custom}
-            onChange={(e) => setCustom(e.target.value)}
-            placeholder="or type your own idea"
-            aria-label="Type your own game idea"
-          />
-          <button
-            type="button"
-            className={styles.customBtn}
-            onClick={() => {
-              setNoted(true);
-              start(BUILDS[Math.floor(Math.random() * BUILDS.length)]);
-            }}
-            disabled={custom.trim().length < 3}
-          >
-            Build it
-          </button>
-        </div>
-        {noted && (
-          <p className={styles.honest}>
-            The real thing builds whatever you ask for. This demo has three games
-            ready to go, so we picked the closest one. Your idea is worth telling
-            us about below.
-          </p>
-        )}
-      </section>
-
-      {phase !== "idle" && (
-        <section className={styles.stage}>
-          <div className={styles.promptBar}>
-            <span className={styles.who}>you</span>
-            <span className={styles.typed}>
-              {typed}
-              {phase === "building" && <i className={styles.caret} />}
+        {phase === "idle" ? (
+          <div className={styles.empty}>
+            <span className={styles.emptyIcon} aria-hidden="true">
+              ▶
             </span>
+            <p>Pick one above to build it</p>
           </div>
-
-          {phase === "building" ? (
-            <div className={styles.building}>
-              <span className={styles.dots}>
-                <i />
-                <i />
-                <i />
+        ) : (
+          <div className={styles.console}>
+            <div className={styles.promptBar}>
+              <span className={styles.who}>asked for</span>
+              <span className={styles.typed}>
+                {typed}
+                {phase === "building" && <i className={styles.caret} />}
               </span>
-              building your game
             </div>
-          ) : (
-            <>
-              <div className={styles.gameWrap}>
-                <div className={styles.hud}>
-                  <span className={styles.file}>{build.file}</span>
-                  <span className={styles.score}>collected {score}</span>
+
+            <div className={styles.screen}>
+              {phase === "building" ? (
+                <div className={styles.building}>
+                  <span className={styles.dots}>
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                  writing the code
                 </div>
-                <div className={styles.game}>
+              ) : (
+                <>
                   <MiniGame variant={build.id} knobs={knobs} onScore={setScore} />
-                </div>
-                <p className={styles.hint}>{build.hint}</p>
-              </div>
+                  <span className={styles.scoreTag}>{score}</span>
+                </>
+              )}
+            </div>
 
-              <div className={styles.knobs}>
-                <h2 className={styles.knobsHead}>Now change it</h2>
-                <p className={styles.knobsSub}>
-                  These are real values in the file. Drag one and the game changes
-                  straight away, nothing to save or reload.
-                </p>
-
-                {KNOBS.map((k) => (
-                  <div key={k.key} className={styles.knob}>
-                    <label className={styles.knobLabel} htmlFor={`k-${k.key}`}>
-                      {k.name}
-                      <code className={styles.knobCode}>
-                        {k.code} = <b>{knobs[k.key]}</b>
-                      </code>
-                    </label>
-                    <input
-                      id={`k-${k.key}`}
-                      className={styles.range}
-                      type="range"
-                      min={k.min}
-                      max={k.max}
-                      step={k.step}
-                      value={knobs[k.key]}
-                      onChange={(e) => change(k.key, Number(e.target.value))}
-                    />
-                  </div>
-                ))}
-
-                <button
-                  type="button"
-                  className={styles.reset}
-                  onClick={() => setKnobs(build.knobs)}
-                >
-                  put it back
-                </button>
-              </div>
-            </>
-          )}
-        </section>
-      )}
-
-      {showAsk && (
-        <section className={styles.ask}>
-          <h2 className={styles.askH}>
-            You just changed code and the game changed.
-          </h2>
-          <p className={styles.askSub}>
-            That is the bit kids get hooked on. The real thing lets them ask for
-            anything, not four sliders. Want your kid on the early list?
-          </p>
-          <div className={styles.askForm}>
-            <WaitlistForm id="playground" page="kids-playground" />
+            <div className={styles.bar}>
+              <span className={styles.file}>{build.file}</span>
+              <span className={styles.hint}>{build.hint}</span>
+            </div>
           </div>
-        </section>
-      )}
+        )}
 
-      <footer className={styles.foot}>
-        <Link href="/" className={styles.footLink}>
-          Back to the site
-        </Link>
-      </footer>
+        {phase === "ready" && (
+          <section className={styles.panel}>
+            <div className={styles.panelHead}>
+              <h2 className={styles.panelH}>Now change it</h2>
+              <button
+                type="button"
+                className={styles.reset}
+                onClick={() => setKnobs(build.knobs)}
+              >
+                put it back
+              </button>
+            </div>
+
+            <div className={styles.knobGrid}>
+              {KNOBS.map((k) => (
+                <div key={k.key} className={`${styles.knob} ${styles[k.tint]}`}>
+                  <label className={styles.knobTop} htmlFor={`k-${k.key}`}>
+                    <span className={styles.knobName}>{k.name}</span>
+                    <span className={styles.knobVal}>{knobs[k.key]}</span>
+                  </label>
+                  <input
+                    id={`k-${k.key}`}
+                    className={styles.range}
+                    type="range"
+                    min={k.min}
+                    max={k.max}
+                    step={k.step}
+                    value={knobs[k.key]}
+                    onChange={(e) => change(k.key, Number(e.target.value))}
+                  />
+                  <code className={styles.knobCode}>
+                    {k.code} = {knobs[k.key]}
+                  </code>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {showAsk && (
+          <section className={styles.ask}>
+            <h2 className={styles.askH}>You just changed code, and it worked.</h2>
+            <p className={styles.askSub}>
+              That is the bit kids get hooked on. The real thing lets them ask for
+              anything, not drag four sliders.
+            </p>
+            <div className={styles.askForm}>
+              <WaitlistForm id="playground" page="kids-playground" />
+            </div>
+          </section>
+        )}
+
+        <footer className={styles.foot}>
+          <Link href="/" className={styles.footLink}>
+            Back to the site
+          </Link>
+        </footer>
+      </div>
     </main>
   );
 }

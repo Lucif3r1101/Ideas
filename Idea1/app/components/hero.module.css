@@ -8,16 +8,64 @@
   transition: background 0.55s ease;
 }
 
-.brand {
+.nav {
   position: relative;
-  z-index: 2;
-  padding: 24px 30px 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 22px 30px 0;
+}
+
+.brand {
   font-family: var(--display);
   font-size: 25px;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--brand);
   transition: color 0.55s ease;
+}
+
+.playBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  color: #24223d;
+  background: #fff;
+  border-radius: 100px;
+  padding: 10px 20px 10px 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(14, 40, 70, 0.22);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.playBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 rgba(14, 40, 70, 0.22);
+}
+
+.playBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 rgba(14, 40, 70, 0.22);
+}
+
+.playIcon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sun);
+  font-size: 9px;
+  color: #4a3708;
+  padding-left: 2px;
 }
 
 .stage {
@@ -77,22 +125,6 @@
   max-width: 400px;
 }
 
-.try {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--lede);
-  opacity: 0.85;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  transition: opacity 0.15s ease, color 0.55s ease;
-}
-
-.try:hover {
-  opacity: 1;
-}
-
 .ws {
   min-width: 0;
 }
@@ -128,9 +160,17 @@
     padding-bottom: 200px;
   }
 
+  .nav {
+    padding: 18px 22px 0;
+  }
+
   .brand {
-    padding: 20px 22px 0;
     font-size: 22px;
+  }
+
+  .playBtn {
+    font-size: 15px;
+    padding: 9px 17px 9px 14px;
   }
 
   .stage {
