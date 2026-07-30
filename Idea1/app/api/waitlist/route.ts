@@ -1,5 +1,7 @@
 import { saveSignup, summary } from "@/lib/store";
 import { checkEmail } from "@/lib/email";
+import { domainAcceptsMail } from "@/lib/mx";
+import { sendConfirmation } from "@/lib/mailer";
 
 function str(v: unknown, max = 2000) {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
@@ -27,6 +29,15 @@ export async function POST(request: Request) {
     );
   }
   const email = check.email;
+
+  // can that domain receive mail at all? blocks /thanks on a dead domain
+  const domain = email.split("@")[1];
+  if (!(await domainAcceptsMail(domain))) {
+    return Response.json(
+      { error: `${domain} can't receive email. Check the spelling?` },
+      { status: 400 }
+    );
+  }
 
   const answer = str(payload.answer);
   const ua = request.headers.get("user-agent") ?? "";
@@ -60,6 +71,11 @@ export async function POST(request: Request) {
         request.headers.get("cf-ipcountry") ??
         "",
     });
+
+    // fire and forget, a failed email is not a reason to lose the signup
+    if (isNew) {
+      void sendConfirmation(email, answer);
+    }
 
     return Response.json({ ok: true, isNew });
   } catch (err) {
