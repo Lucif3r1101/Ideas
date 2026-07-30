@@ -1,9 +1,14 @@
-import { saveSignup, readSignups } from "@/lib/store";
+import { saveSignup, summary } from "@/lib/store";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function str(v: unknown, max = 2000) {
   return typeof v === "string" ? v.trim().slice(0, max) : "";
+}
+
+function num(v: unknown, max = 100000) {
+  const n = typeof v === "number" ? v : Number(v);
+  return Number.isFinite(n) ? Math.min(Math.max(0, Math.round(n)), max) : 0;
 }
 
 export async function POST(request: Request) {
@@ -16,7 +21,6 @@ export async function POST(request: Request) {
   }
 
   const email = str(payload.email, 320).toLowerCase();
-
   if (!EMAIL.test(email)) {
     return Response.json(
       { error: "That doesn't look like an email address." },
@@ -24,36 +28,60 @@ export async function POST(request: Request) {
     );
   }
 
-  await saveSignup({
-    email,
-    answer: str(payload.answer),
-    page: str(payload.page, 80) || "kids",
-    utm_source: str(payload.utm_source, 120),
-    utm_medium: str(payload.utm_medium, 120),
-    utm_campaign: str(payload.utm_campaign, 120),
-    utm_content: str(payload.utm_content, 120),
-    referrer: str(payload.referrer, 500),
-    createdAt: new Date().toISOString(),
-  });
+  const answer = str(payload.answer);
+  const ua = request.headers.get("user-agent") ?? "";
 
-  return Response.json({ ok: true });
+  try {
+    const { isNew } = await saveSignup({
+      email,
+      answer,
+      answer_len: answer.length,
+
+      page: str(payload.page, 60) || "kids",
+      landing_page: str(payload.landing_page, 200) || "/",
+      signup_path: str(payload.signup_path, 200) || "/",
+
+      source: str(payload.source, 80) || "direct",
+      channel: str(payload.channel, 30) || "direct",
+      referrer: str(payload.referrer, 400),
+      utm_source: str(payload.utm_source, 120),
+      utm_medium: str(payload.utm_medium, 120),
+      utm_campaign: str(payload.utm_campaign, 120),
+      utm_content: str(payload.utm_content, 120),
+      utm_term: str(payload.utm_term, 120),
+
+      played: Boolean(payload.played),
+      tweaks: num(payload.tweaks, 999),
+      score: num(payload.score, 9999),
+
+      device: /Mobi|Android|iPhone|iPad/i.test(ua) ? "mobile" : "desktop",
+      country:
+        request.headers.get("x-vercel-ip-country") ??
+        request.headers.get("cf-ipcountry") ??
+        "",
+    });
+
+    return Response.json({ ok: true, isNew });
+  } catch (err) {
+    console.error("waitlist save failed", err);
+    return Response.json(
+      { error: "Couldn't save that. Try again in a moment?" },
+      { status: 500 }
+    );
+  }
 }
 
-// Quick way to eyeball results in dev: visit /api/waitlist
-export async function GET() {
+// Quick numbers while testing. Not exposed in production.
+export async function GET(request: Request) {
   if (process.env.NODE_ENV === "production") {
     return Response.json({ error: "Not available." }, { status: 404 });
   }
 
-  const rows = await readSignups();
-  const answered = rows.filter((r) => r.answer.length > 0);
+  const page = new URL(request.url).searchParams.get("page") ?? undefined;
 
-  return Response.json({
-    total: rows.length,
-    answered: answered.length,
-    answerRate: rows.length
-      ? Math.round((answered.length / rows.length) * 100) + "%"
-      : "—",
-    rows: rows.slice().reverse(),
-  });
+  try {
+    return Response.json(await summary(page));
+  } catch (err) {
+    return Response.json({ error: String(err) }, { status: 500 });
+  }
 }

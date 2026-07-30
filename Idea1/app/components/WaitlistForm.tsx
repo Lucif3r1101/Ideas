@@ -1,50 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { attribution } from "@/lib/attribution";
+import { track } from "@/lib/analytics";
 import styles from "./waitlist-form.module.css";
-
-type Tracking = {
-  utm_source: string;
-  utm_medium: string;
-  utm_campaign: string;
-  utm_content: string;
-  referrer: string;
-};
-
-const EMPTY: Tracking = {
-  utm_source: "",
-  utm_medium: "",
-  utm_campaign: "",
-  utm_content: "",
-  referrer: "",
-};
 
 export default function WaitlistForm({
   id,
   page = "kids",
+  played = false,
+  tweaks = 0,
+  score = 0,
 }: {
   id: string;
   page?: string;
+  /** engagement, so we can see whether playing predicts signing up */
+  played?: boolean;
+  tweaks?: number;
+  score?: number;
 }) {
   const router = useRouter();
-  const tracking = useRef<Tracking>(EMPTY);
   const [email, setEmail] = useState("");
   const [answer, setAnswer] = useState("");
   const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [error, setError] = useState("");
-
-  // UTMs come off the URL so the visitor never sees extra fields.
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
-    tracking.current = {
-      utm_source: q.get("utm_source") ?? "",
-      utm_medium: q.get("utm_medium") ?? "",
-      utm_campaign: q.get("utm_campaign") ?? "",
-      utm_content: q.get("utm_content") ?? "",
-      referrer: document.referrer ?? "",
-    };
-  }, []);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,6 +38,8 @@ export default function WaitlistForm({
     setStatus("sending");
     setError("");
 
+    const attr = attribution();
+
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
@@ -66,19 +48,37 @@ export default function WaitlistForm({
           email: email.trim(),
           answer: answer.trim(),
           page,
-          ...tracking.current,
+          played,
+          tweaks,
+          score,
+          signup_path:
+            typeof window === "undefined" ? "/" : window.location.pathname,
+          ...attr,
         }),
       });
 
       if (!res.ok) {
         const b = await res.json().catch(() => ({}));
+        void track("waitlist_error", { page, reason: b.error ?? "unknown" });
         setError(b.error ?? "That didn't work. Try again?");
         setStatus("idle");
         return;
       }
 
+      const body = await res.json().catch(() => ({}));
+      void track("waitlist_submit", {
+        page,
+        has_answer: answer.trim().length > 0,
+        answer_len: answer.trim().length,
+        played,
+        tweaks,
+        score,
+        is_new: body.isNew !== false,
+      });
+
       router.push("/thanks");
     } catch {
+      void track("waitlist_error", { page, reason: "network" });
       setError("Couldn't reach us. Check your connection.");
       setStatus("idle");
     }

@@ -14,7 +14,13 @@ build/
 !.env.example
 serviceAccount.json
 *-service-account.json
+*service-account*.json
+*serviceaccount*.json
+*adminsdk*.json
+*firebase-adminsdk*
 *.pem
+*.p12
+*credentials*.json
 
 # waitlist signups (local runs only)
 data/

@@ -5,6 +5,7 @@ import Link from "next/link";
 import MiniGame, { type Knobs } from "../components/MiniGame";
 import WaitlistForm from "../components/WaitlistForm";
 import type { Variant } from "../components/GameScene";
+import { track } from "@/lib/analytics";
 import styles from "./playground.module.css";
 
 type Build = {
@@ -80,6 +81,7 @@ export default function Playground() {
   const [typed, setTyped] = useState("");
   const [tweaks, setTweaks] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const fired = useRef<Set<string>>(new Set());
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
@@ -90,8 +92,11 @@ export default function Playground() {
     setKnobs(b.knobs);
     setScore(0);
     setTweaks(0);
+    fired.current = new Set();
     setPhase("building");
     setTyped("");
+
+    void track("playground_build", { game: b.id, file: b.file });
 
     b.prompt.split("").forEach((_, i) => {
       timers.current.push(
@@ -106,6 +111,12 @@ export default function Playground() {
   function change(key: keyof Knobs, value: number) {
     setKnobs((k) => ({ ...k, [key]: value }));
     setTweaks((n) => n + 1);
+
+    // one event per knob per game, dragging fires onChange constantly
+    if (!fired.current.has(key)) {
+      fired.current.add(key);
+      void track("playground_tweak", { game: build.id, knob: key });
+    }
   }
 
   const showAsk = tweaks >= 3 || score >= 3;
@@ -243,7 +254,13 @@ export default function Playground() {
               anything, not drag four sliders.
             </p>
             <div className={styles.askForm}>
-              <WaitlistForm id="playground" page="kids-playground" />
+              <WaitlistForm
+                id="playground"
+                page="kids-playground"
+                played
+                tweaks={tweaks}
+                score={score}
+              />
             </div>
           </section>
         )}
