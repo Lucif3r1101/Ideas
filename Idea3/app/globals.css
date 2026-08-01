@@ -1,32 +1,36 @@
 /*
- * Dark by default. This one is about building on a phone, usually late and
- * usually one handed. A dark ground makes the lit phone screen in the middle
- * of the page read as the thing that matters.
+ * Light, warm and consumer. The point of this product is that you do not
+ * need to be a developer, so it should not look like a terminal. The phone
+ * is the hero, everything else stays quiet so the lit screen stands out.
  */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #0e1016;
-  --bg-2: #141721;
-  --card: #191d28;
-  --line: #262b39;
+  --paper: #fbfaf8;
+  --paper-2: #f3f1ee;
+  --card: #ffffff;
+  --line: #e6e2dc;
+  --line-2: #f0ede8;
 
-  --ink: #f0f2f7;
-  --ink-2: #c8cddb;
-  --muted: #8b92a6;
-  --muted-2: #626a7e;
+  --ink: #16121f;
+  --ink-2: #3b3549;
+  --muted: #6d6579;
+  --muted-2: #9c94a8;
 
-  --accent: #2fe07e;
-  --accent-dark: #1fb463;
-  --accent-soft: #12331f;
-  --bad: #ff6b5a;
+  --violet: #5b3df5;
+  --violet-dark: #4429d1;
+  --violet-soft: #ece8ff;
+  --coral: #ff5c39;
+  --coral-dark: #dd3d1c;
+  --lime: #b6f542;
+  --sun: #ffc24a;
 
   --display: var(--font-display), -apple-system, BlinkMacSystemFont, sans-serif;
   --body: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
 
   --r-sm: 12px;
   --r: 18px;
-  --r-lg: 26px;
+  --r-lg: 28px;
 
   --gutter: 22px;
   --max: 1120px;
@@ -43,7 +47,7 @@ body {
 }
 
 body {
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
   font-size: 17px;
@@ -57,12 +61,12 @@ a {
 }
 
 ::selection {
-  background: var(--accent);
-  color: #0e1016;
+  background: var(--lime);
+  color: var(--ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--violet);
   outline-offset: 3px;
   border-radius: 5px;
 }

@@ -1,8 +1,13 @@
 /* ---------- nav ---------- */
 .nav {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.navInner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 22px var(--gutter) 0;
+  padding: 15px var(--gutter);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,102 +16,202 @@
 
 .brand {
   font-family: var(--display);
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 800;
   letter-spacing: -0.035em;
 }
 
-.tag {
-  font-family: var(--body);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-soft);
+.playBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--violet);
   border-radius: 100px;
-  padding: 6px 13px;
+  padding: 10px 18px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 var(--violet-dark);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.playBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 0 var(--violet-dark);
+}
+
+.playBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--violet-dark);
+}
+
+.playArrow {
+  font-size: 14px;
 }
 
 /* ---------- hero ---------- */
 .hero {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 62px var(--gutter) 46px;
+  background: var(--paper);
+  overflow: hidden;
 }
 
-.copy {
-  max-width: 640px;
+.heroInner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 58px var(--gutter) 64px;
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 48px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--coral);
+  margin-bottom: 18px;
 }
 
 .h1 {
   font-family: var(--display);
-  font-size: clamp(38px, 6.6vw, 72px);
+  font-size: clamp(38px, 6vw, 66px);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.02;
+  letter-spacing: -0.05em;
+  line-height: 1.01;
   margin: 0 0 20px;
 }
 
 .mark {
-  color: var(--accent);
+  color: var(--violet);
 }
 
 .lede {
-  margin: 0 0 30px;
-  font-size: clamp(17px, 2vw, 20px);
+  margin: 0 0 28px;
+  font-size: clamp(17px, 1.9vw, 19.5px);
   font-weight: 500;
   line-height: 1.55;
   color: var(--muted);
-  max-width: 48ch;
+  max-width: 46ch;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
 }
 
 .form {
+  width: 100%;
   max-width: 420px;
 }
 
-/* ---------- demo ---------- */
-.demo {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 10px var(--gutter) 74px;
+.tryLink {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--violet);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- phone art ---------- */
+.art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.glow {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(91, 61, 245, 0.2) 0%,
+    rgba(255, 92, 57, 0.13) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.art > :global(div) {
+  position: relative;
+  z-index: 1;
+}
+
+.artCaption {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--muted-2);
+  text-align: center;
 }
 
 /* ---------- truths ---------- */
 .truths {
+  background: var(--paper-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.truthsInner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 var(--gutter) 70px;
+  padding: 56px var(--gutter);
 }
 
 .h2 {
   font-family: var(--display);
   font-size: clamp(26px, 3.6vw, 36px);
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-weight: 800;
+  letter-spacing: -0.04em;
   margin: 0 0 30px;
 }
 
 .list {
+  list-style: none;
   margin: 0;
+  padding: 0;
   border-top: 1px solid var(--line);
 }
 
 .row {
   display: grid;
-  grid-template-columns: 0.62fr 1.38fr;
-  gap: 28px;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
   padding: 20px 0;
   border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.num {
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--violet);
 }
 
 .k {
   font-family: var(--display);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--ink);
+  letter-spacing: -0.025em;
+  margin: 0 0 5px;
 }
 
 .v {
@@ -118,18 +223,22 @@
   max-width: 58ch;
 }
 
-/* ---------- last ask ---------- */
+/* ---------- last ---------- */
 .last {
+  background: var(--paper);
+}
+
+.lastInner {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 var(--gutter) 70px;
+  padding: 60px var(--gutter);
 }
 
 .h2Last {
   font-family: var(--display);
   font-size: clamp(28px, 4.4vw, 44px);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   line-height: 1.04;
   margin: 0 0 12px;
 }
@@ -150,7 +259,7 @@
 .footer {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 22px var(--gutter) 46px;
+  padding: 20px var(--gutter) 46px;
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
@@ -163,27 +272,41 @@
 
 .footBrand {
   font-family: var(--display);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--muted);
 }
 
 /* ---------- responsive ---------- */
-@media (max-width: 700px) {
-  .hero {
-    padding: 44px var(--gutter) 34px;
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px var(--gutter) 48px;
   }
 
-  .lede {
+  .art {
+    order: -1;
+  }
+
+  .lede,
+  .form {
     max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .h1 {
+    font-size: 38px;
+  }
+
+  .glow {
+    width: 300px;
+    height: 300px;
   }
 
   .row {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .demo {
-    padding-bottom: 56px;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
   }
 
   .footer {

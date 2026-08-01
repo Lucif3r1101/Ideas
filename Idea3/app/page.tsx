@@ -1,23 +1,29 @@
-import Builder from "./components/Builder";
+import Link from "next/link";
+import Phone from "./components/Phone";
+import SplitBill from "./components/apps/SplitBill";
 import WaitlistForm from "./components/WaitlistForm";
 import styles from "./page.module.css";
 
 const TRUTHS = [
   {
-    k: "No laptop",
-    v: "Everything happens on the phone. Writing it, running it, sharing it. There is no desktop version you are missing out on.",
+    n: "01",
+    k: "No laptop, ever",
+    v: "Writing it, running it, sharing it. All of it happens on the phone. There is no desktop version you are missing out on.",
   },
   {
-    k: "No setup",
-    v: "Nothing to install, no terminal, no environment to configure. Open it and start.",
+    n: "02",
+    k: "Nothing to install",
+    v: "No terminal, no environment to set up, no downloads. Open it and start typing.",
   },
   {
-    k: "It runs where you built it",
-    v: "Tap the link and the thing works. Send it to someone and it works for them too.",
+    n: "03",
+    k: "It runs where you made it",
+    v: "Tap it and the thing works. Send the link to a friend and it works for them too.",
   },
   {
+    n: "04",
     k: "Real code underneath",
-    v: "Open it any time. When you outgrow the phone, the project comes with you.",
+    v: "Open it whenever you want to look. If you outgrow the phone one day, the project comes with you.",
   },
 ];
 
@@ -25,52 +31,80 @@ export default function Home() {
   return (
     <main>
       <nav className={styles.nav}>
-        <span className={styles.brand}>Thumb</span>
-        <span className={styles.tag}>Early access</span>
+        <div className={styles.navInner}>
+          <span className={styles.brand}>Thumb</span>
+          <Link href="/playground" className={styles.playBtn}>
+            Try it
+            <span className={styles.playArrow} aria-hidden="true">
+              →
+            </span>
+          </Link>
+        </div>
       </nav>
 
       <section className={styles.hero}>
-        <div className={styles.copy}>
-          <h1 className={styles.h1}>
-            You don&rsquo;t need a laptop
-            <br />
-            <span className={styles.mark}>to build software.</span>
-          </h1>
-          <p className={styles.lede}>
-            Most people who want to make something have a phone and nothing
-            else. So build it on the phone. Type what you want, watch it appear,
-            use it straight away.
-          </p>
+        <div className={styles.heroInner}>
+          <div className={styles.copy}>
+            <span className={styles.eyebrow}>Build from your phone</span>
+            <h1 className={styles.h1}>
+              You don&rsquo;t need a laptop
+              <br />
+              <span className={styles.mark}>to build software.</span>
+            </h1>
+            <p className={styles.lede}>
+              Most people who want to make something have a phone and nothing
+              else. So make it on the phone. Say what you want, watch it appear,
+              use it straight away.
+            </p>
 
-          <div className={styles.form}>
-            <WaitlistForm id="top" page="mobile" />
+            <div className={styles.actions}>
+              <div className={styles.form}>
+                <WaitlistForm id="top" page="mobile" />
+              </div>
+              <Link href="/playground" className={styles.tryLink}>
+                or try one now
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.art}>
+            <div className={styles.glow} aria-hidden="true" />
+            <Phone>
+              <SplitBill />
+            </Phone>
+            <p className={styles.artCaption}>
+              A real app, running. Change the numbers.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className={styles.demo}>
-        <Builder />
-      </section>
-
       <section className={styles.truths}>
-        <h2 className={styles.h2}>How it actually works</h2>
-        <dl className={styles.list}>
-          {TRUTHS.map((t) => (
-            <div key={t.k} className={styles.row}>
-              <dt className={styles.k}>{t.k}</dt>
-              <dd className={styles.v}>{t.v}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className={styles.truthsInner}>
+          <h2 className={styles.h2}>How it actually works</h2>
+          <ol className={styles.list}>
+            {TRUTHS.map((t) => (
+              <li key={t.n} className={styles.row}>
+                <span className={styles.num}>{t.n}</span>
+                <div>
+                  <h3 className={styles.k}>{t.k}</h3>
+                  <p className={styles.v}>{t.v}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       <section className={styles.last}>
-        <h2 className={styles.h2Last}>What would you build first?</h2>
-        <p className={styles.lastSub}>
-          Tell us and we&rsquo;ll let you know the moment it opens.
-        </p>
-        <div className={styles.lastForm}>
-          <WaitlistForm id="bottom" page="mobile" />
+        <div className={styles.lastInner}>
+          <h2 className={styles.h2Last}>What would you build first?</h2>
+          <p className={styles.lastSub}>
+            Tell us and we&rsquo;ll let you know the moment it opens.
+          </p>
+          <div className={styles.lastForm}>
+            <WaitlistForm id="bottom" page="mobile" />
+          </div>
         </div>
       </section>
 
