@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Phone from "./components/Phone";
-import SplitBill from "./components/apps/SplitBill";
+import TripApp from "./components/apps/TripApp";
 import WaitlistForm from "./components/WaitlistForm";
 import styles from "./page.module.css";
 
@@ -58,10 +58,10 @@ export default function Home() {
           <div className={styles.art}>
             <div className={styles.glow} aria-hidden="true" />
             <Phone>
-              <SplitBill />
+              <TripApp />
             </Phone>
             <p className={styles.artCaption}>
-              A real app, running. Change the numbers.
+              A real app with four screens. Tap the tabs.
             </p>
           </div>
         </div>
@@ -69,7 +69,12 @@ export default function Home() {
 
       <section className={styles.truths}>
         <div className={styles.truthsInner}>
-          <h2 className={styles.h2}>How it actually works</h2>
+          <div className={styles.truthsHead}>
+            <h2 className={styles.h2}>How it actually works</h2>
+            <Link href="/how" className={styles.deeper}>
+              The technical version →
+            </Link>
+          </div>
           <ol className={styles.list}>
             {TRUTHS.map((t) => (
               <li key={t.n} className={styles.row}>
@@ -96,10 +101,6 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <span className={styles.footBrand}>Thumb</span>
-        <span>Not out yet. That&rsquo;s what the list is for.</span>
-      </footer>
     </main>
   );
 }

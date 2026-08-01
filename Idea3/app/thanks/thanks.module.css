@@ -10,9 +10,9 @@
   max-width: 480px;
   width: 100%;
   background: var(--card);
-  border-radius: var(--r-lg);
+  border-radius: 26px;
   padding: 34px 32px 32px;
-  box-shadow: 0 8px 0 rgba(22, 18, 31, 0.09), 0 24px 44px -24px rgba(22, 18, 31, 0.4);
+  box-shadow: 0 8px 0 rgba(22, 18, 31, 0.07), 0 24px 44px -24px rgba(22, 18, 31, 0.4);
   text-align: center;
 }
 

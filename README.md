@@ -27,6 +27,15 @@ The number that decides anything is not total signups. It is the share of
 answers that name something specific. "A bot that drafts replies to our support
 tickets" is real intent. "An AI agent" is someone echoing the page.
 
+## Pages per idea
+
+Idea1 has a homepage and a playground. Idea3 has a homepage, a playground, an
+examples gallery and a technical page, because the people it is aimed at write
+code and wanted more than three toy demos before handing over an email.
+
+Every page tags its signups separately, so `mobile` and `mobile-playground`
+can be compared rather than lumped together.
+
 ## Running one locally
 
 ```bash

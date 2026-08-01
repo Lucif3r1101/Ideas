@@ -1,0 +1,79 @@
+.foot {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+  margin-top: 20px;
+}
+
+.inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 34px var(--gutter) 26px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.brand {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.line {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--muted);
+  max-width: 34ch;
+}
+
+.links {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.link {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--violet);
+}
+
+.bottom {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 16px var(--gutter) 40px;
+  border-top: 1px solid var(--line-2);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-2);
+}
+
+@media (max-width: 560px) {
+  .inner {
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px var(--gutter) 20px;
+  }
+
+  .links {
+    gap: 16px;
+  }
+}

@@ -4,11 +4,14 @@ import Countdown from "@/app/components/apps/Countdown";
 import Expenses from "@/app/components/apps/Expenses";
 import Pomodoro from "@/app/components/apps/Pomodoro";
 import Flashcards from "@/app/components/apps/Flashcards";
+import TripApp from "@/app/components/apps/TripApp";
 
 export type Demo = {
   id: string;
   chip: string;
   title: string;
+  /** how many screens the generated app has */
+  screens: number;
   prompt: string;
   file: string;
   /** what a dev should notice about it */
@@ -19,9 +22,21 @@ export type Demo = {
 
 export const DEMOS: Demo[] = [
   {
+    id: "trip",
+    chip: "Split a trip",
+    title: "Trip expenses",
+    screens: 4,
+    prompt: "an app to track what we all spent on our goa trip and who owes who",
+    file: "trip/",
+    shows: "4 screens, tab bar, shared state",
+    what: "Four screens sharing one state. Add a spend, switch tabs, add someone, watch every balance change.",
+    app: () => <TripApp />,
+  },
+  {
     id: "split",
     chip: "Split a bill",
     title: "Bill splitter",
+    screens: 1,
     prompt: "an app to split the bill with my friends, with tip",
     file: "split.tsx",
     shows: "Derived state",
@@ -32,6 +47,7 @@ export const DEMOS: Demo[] = [
     id: "expenses",
     chip: "Track spending",
     title: "Expense log",
+    screens: 1,
     prompt: "let me log what i spend today and see the total",
     file: "expenses.tsx",
     shows: "List state, add and remove",
@@ -42,6 +58,7 @@ export const DEMOS: Demo[] = [
     id: "pomodoro",
     chip: "Focus timer",
     title: "Pomodoro",
+    screens: 1,
     prompt: "a 25 minute focus timer that switches to a break after",
     file: "pomodoro.tsx",
     shows: "Intervals and cleanup",
@@ -52,6 +69,7 @@ export const DEMOS: Demo[] = [
     id: "habit",
     chip: "Track a habit",
     title: "Habit tracker",
+    screens: 1,
     prompt: "something to track if i went to the gym this week",
     file: "habit.tsx",
     shows: "Computed streaks",
@@ -62,6 +80,7 @@ export const DEMOS: Demo[] = [
     id: "cards",
     chip: "Flashcards",
     title: "Flashcards",
+    screens: 1,
     prompt: "flashcards to revise react, tap to flip them",
     file: "cards.tsx",
     shows: "3D transforms, deck state",
@@ -72,6 +91,7 @@ export const DEMOS: Demo[] = [
     id: "count",
     chip: "Count down",
     title: "Countdown",
+    screens: 1,
     prompt: "a countdown to my exam that updates every second",
     file: "countdown.tsx",
     shows: "Live ticking clock",

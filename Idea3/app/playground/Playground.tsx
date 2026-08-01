@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Phone from "../components/Phone";
 import WaitlistForm from "../components/WaitlistForm";
 import { DEMOS, type Demo } from "@/lib/apps";
@@ -91,7 +90,9 @@ export default function Playground() {
               <div className={styles.fileRow}>
                 <span className={styles.dot} />
                 <code className={styles.file}>{build.file}</code>
-                <span className={styles.done}>ready</span>
+                <span className={styles.done}>
+                  {build.screens > 1 ? `${build.screens} screens` : "ready"}
+                </span>
               </div>
               <p className={styles.what}>{build.what}</p>
             </div>
@@ -142,11 +143,6 @@ export default function Playground() {
         </div>
       </section>
 
-      <footer className={styles.foot}>
-        <Link href="/" className={styles.footLink}>
-          Back to the site
-        </Link>
-      </footer>
     </main>
   );
 }

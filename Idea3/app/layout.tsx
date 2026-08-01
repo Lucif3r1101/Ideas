@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import Analytics from "./components/Analytics";
 import SiteNav from "./components/SiteNav";
+import SiteFooter from "./components/SiteFooter";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body>
         <SiteNav />
         {children}
+        <SiteFooter />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>

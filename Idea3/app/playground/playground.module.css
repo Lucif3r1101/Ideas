@@ -4,34 +4,6 @@
   padding: 0 var(--gutter) 70px;
 }
 
-/* ---------- nav ---------- */
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 22px 0 0;
-}
-
-.brand {
-  font-family: var(--display);
-  font-size: 23px;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  text-decoration: none;
-}
-
-.tag {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--violet);
-  background: var(--violet-soft);
-  border-radius: 100px;
-  padding: 6px 14px;
-}
-
 /* ---------- head ---------- */
 .head {
   padding: 38px 0 28px;
@@ -352,23 +324,6 @@
 
 .form {
   max-width: 420px;
-}
-
-/* ---------- foot ---------- */
-.foot {
-  padding-top: 30px;
-}
-
-.footLink {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--muted-2);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.footLink:hover {
-  color: var(--violet);
 }
 
 /* ---------- responsive ---------- */

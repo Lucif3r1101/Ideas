@@ -39,7 +39,14 @@ export default function Examples() {
               aria-pressed={open === d.id}
             >
               <div className={styles.cardTop}>
-                <h2 className={styles.cardTitle}>{d.title}</h2>
+                <h2 className={styles.cardTitle}>
+                  {d.title}
+                  {d.screens > 1 && (
+                    <span className={styles.screens}>
+                      {d.screens} screens
+                    </span>
+                  )}
+                </h2>
                 <span className={styles.shows}>{d.shows}</span>
               </div>
               <p className={styles.said}>&ldquo;{d.prompt}&rdquo;</p>

@@ -121,12 +121,30 @@
   padding: 56px var(--gutter);
 }
 
+.truthsHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
 .h2 {
   font-family: var(--display);
   font-size: clamp(26px, 3.6vw, 36px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  margin: 0 0 30px;
+  margin: 0;
+}
+
+.deeper {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--violet);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  white-space: nowrap;
 }
 
 .list {
@@ -202,27 +220,6 @@
   max-width: 440px;
 }
 
-/* ---------- footer ---------- */
-.footer {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 20px var(--gutter) 46px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--muted-2);
-}
-
-.footBrand {
-  font-family: var(--display);
-  font-weight: 800;
-  color: var(--muted);
-}
-
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .heroInner {
@@ -256,8 +253,4 @@
     gap: 12px;
   }
 
-  .footer {
-    flex-direction: column;
-    gap: 6px;
-  }
 }

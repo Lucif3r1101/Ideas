@@ -243,3 +243,18 @@
     height: 290px;
   }
 }
+
+.screens {
+  display: inline-block;
+  margin-left: 9px;
+  font-family: var(--body);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--coral);
+  background: #ffece7;
+  border-radius: 100px;
+  padding: 3px 9px;
+  vertical-align: 2px;
+}
