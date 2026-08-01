@@ -1,0 +1,179 @@
+.shell {
+  position: relative;
+  width: 300px;
+  height: 620px;
+  flex: none;
+  background: #1b1e26;
+  border-radius: 46px;
+  padding: 11px;
+  box-shadow:
+    inset 0 0 0 2px #33384a,
+    0 24px 50px -18px rgba(0, 0, 0, 0.75),
+    0 2px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* side buttons, they sell the illusion more than any bezel detail */
+.buttonsL,
+.buttonR {
+  position: absolute;
+  background: #2a2e3b;
+  border-radius: 3px;
+}
+
+.buttonsL {
+  left: -3px;
+  top: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: none;
+}
+
+.buttonsL i {
+  display: block;
+  width: 3px;
+  background: #2a2e3b;
+  border-radius: 3px 0 0 3px;
+}
+
+.buttonsL i:nth-child(1) {
+  height: 26px;
+}
+.buttonsL i:nth-child(2),
+.buttonsL i:nth-child(3) {
+  height: 46px;
+}
+
+.buttonR {
+  right: -3px;
+  top: 168px;
+  width: 3px;
+  height: 66px;
+  border-radius: 0 3px 3px 0;
+}
+
+.screen {
+  position: relative;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  background: #f7f8fb;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- status bar --- */
+.status {
+  position: relative;
+  flex: none;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: #f7f8fb;
+  z-index: 2;
+}
+
+.time {
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 800;
+  color: #14161d;
+  font-variant-numeric: tabular-nums;
+}
+
+.notch {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  width: 82px;
+  height: 24px;
+  background: #14161d;
+  border-radius: 14px;
+}
+
+.icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.signal,
+.wifi,
+.battery {
+  display: block;
+  background: #14161d;
+}
+
+.signal {
+  width: 15px;
+  height: 10px;
+  clip-path: polygon(0 70%, 25% 70%, 25% 100%, 0 100%, 30% 45%, 55% 45%, 55% 100%, 30% 100%, 60% 20%, 85% 20%, 85% 100%, 60% 100%);
+}
+
+.wifi {
+  width: 13px;
+  height: 10px;
+  border-radius: 2px;
+  clip-path: polygon(50% 100%, 0 30%, 20% 12%, 50% 0, 80% 12%, 100% 30%);
+}
+
+.battery {
+  width: 22px;
+  height: 11px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 3.5px;
+  width: 2px;
+  height: 4px;
+  background: #14161d;
+  border-radius: 0 2px 2px 0;
+}
+
+/* --- app area --- */
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.homebar {
+  flex: none;
+  height: 22px;
+  background: #f7f8fb;
+  position: relative;
+}
+
+.homebar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  transform: translateX(-50%);
+  width: 118px;
+  height: 4px;
+  border-radius: 3px;
+  background: #14161d;
+  opacity: 0.24;
+}
+
+@media (max-width: 520px) {
+  .shell {
+    width: 272px;
+    height: 560px;
+    border-radius: 40px;
+    padding: 10px;
+  }
+
+  .screen {
+    border-radius: 31px;
+  }
+}

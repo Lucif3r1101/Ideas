@@ -1,0 +1,67 @@
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px var(--gutter);
+}
+
+.card {
+  max-width: 480px;
+  width: 100%;
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: 34px 32px 32px;
+  box-shadow: 0 8px 0 rgba(43, 42, 69, 0.09), 0 24px 44px -24px rgba(43, 42, 69, 0.4);
+  text-align: center;
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--mint);
+  font-size: 32px;
+  box-shadow: 0 5px 0 var(--mint-dark);
+}
+
+.h1 {
+  font-family: var(--display);
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  margin: 0 0 10px;
+}
+
+.body {
+  margin: 0 auto;
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 26px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.back:hover {
+  color: var(--grape);
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 28px 22px 26px;
+  }
+}

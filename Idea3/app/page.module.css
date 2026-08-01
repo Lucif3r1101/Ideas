@@ -1,0 +1,193 @@
+/* ---------- nav ---------- */
+.nav {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 22px var(--gutter) 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.brand {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.tag {
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 100px;
+  padding: 6px 13px;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 62px var(--gutter) 46px;
+}
+
+.copy {
+  max-width: 640px;
+}
+
+.h1 {
+  font-family: var(--display);
+  font-size: clamp(38px, 6.6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  margin: 0 0 20px;
+}
+
+.mark {
+  color: var(--accent);
+}
+
+.lede {
+  margin: 0 0 30px;
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+.form {
+  max-width: 420px;
+}
+
+/* ---------- demo ---------- */
+.demo {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 10px var(--gutter) 74px;
+}
+
+/* ---------- truths ---------- */
+.truths {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 70px;
+}
+
+.h2 {
+  font-family: var(--display);
+  font-size: clamp(26px, 3.6vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  margin: 0 0 30px;
+}
+
+.list {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 0.62fr 1.38fr;
+  gap: 28px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.k {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--ink);
+}
+
+.v {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 58ch;
+}
+
+/* ---------- last ask ---------- */
+.last {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 70px;
+}
+
+.h2Last {
+  font-family: var(--display);
+  font-size: clamp(28px, 4.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  margin: 0 0 12px;
+}
+
+.lastSub {
+  margin: 0 0 26px;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--muted);
+  max-width: 42ch;
+}
+
+.lastForm {
+  max-width: 440px;
+}
+
+/* ---------- footer ---------- */
+.footer {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 22px var(--gutter) 46px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted-2);
+}
+
+.footBrand {
+  font-family: var(--display);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 700px) {
+  .hero {
+    padding: 44px var(--gutter) 34px;
+  }
+
+  .lede {
+    max-width: none;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .demo {
+    padding-bottom: 56px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

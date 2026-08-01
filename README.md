@@ -10,7 +10,7 @@ comparable across them.
 | ------ | ---- | ------ |
 | `Idea1` | Coding for kids. Describe a game, it gets built, then you change it. | built |
 | `Idea2` | Making an existing product AI native | not started |
-| `Idea3` | Mobile first coding | not started |
+| `Idea3` | Mobile first coding. Build real apps on a phone, no laptop. | built |
 | `Idea4` | Building AI products | not started |
 
 ## How the test works

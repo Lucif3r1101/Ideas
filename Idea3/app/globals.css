@@ -1,0 +1,77 @@
+/*
+ * Dark by default. This one is about building on a phone, usually late and
+ * usually one handed. A dark ground makes the lit phone screen in the middle
+ * of the page read as the thing that matters.
+ */
+:root {
+  color-scheme: dark;
+
+  --bg: #0e1016;
+  --bg-2: #141721;
+  --card: #191d28;
+  --line: #262b39;
+
+  --ink: #f0f2f7;
+  --ink-2: #c8cddb;
+  --muted: #8b92a6;
+  --muted-2: #626a7e;
+
+  --accent: #2fe07e;
+  --accent-dark: #1fb463;
+  --accent-soft: #12331f;
+  --bad: #ff6b5a;
+
+  --display: var(--font-display), -apple-system, BlinkMacSystemFont, sans-serif;
+  --body: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --r-sm: 12px;
+  --r: 18px;
+  --r-lg: 26px;
+
+  --gutter: 22px;
+  --max: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: #0e1016;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
