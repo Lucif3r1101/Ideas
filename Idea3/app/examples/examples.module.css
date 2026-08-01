@@ -175,35 +175,6 @@
   color: var(--muted);
 }
 
-/* ---------- ask ---------- */
-.ask {
-  margin-top: 64px;
-  background: var(--ink);
-  border-radius: var(--r-lg);
-  padding: 40px 34px;
-  color: #fff;
-}
-
-.h2 {
-  font-family: var(--display);
-  font-size: clamp(25px, 3.6vw, 34px);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  margin: 0 0 10px;
-}
-
-.askSub {
-  margin: 0 0 24px;
-  font-size: 16.5px;
-  font-weight: 500;
-  color: #a79fb6;
-  max-width: 40ch;
-}
-
-.form {
-  max-width: 420px;
-}
-
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .split {
@@ -257,4 +228,8 @@
   border-radius: 100px;
   padding: 3px 9px;
   vertical-align: 2px;
+}
+
+.ctaWrap {
+  margin-top: 62px;
 }

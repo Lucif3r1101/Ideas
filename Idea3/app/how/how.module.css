@@ -205,40 +205,6 @@
   max-width: 62ch;
 }
 
-/* ---------- ask ---------- */
-.ask {
-  background: var(--ink);
-  border-radius: var(--r-lg);
-  padding: 40px 34px;
-  color: #fff;
-}
-
-.h2Ask {
-  font-family: var(--display);
-  font-size: clamp(25px, 3.6vw, 34px);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  margin: 0 0 10px;
-}
-
-.askSub {
-  margin: 0 0 24px;
-  font-size: 16.5px;
-  font-weight: 500;
-  color: #a79fb6;
-  max-width: 46ch;
-}
-
-.inline {
-  color: var(--lime);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.form {
-  max-width: 420px;
-}
-
 @media (max-width: 560px) {
   .head {
     padding: 30px 0 26px;
@@ -246,10 +212,6 @@
 
   .h1 {
     font-size: 33px;
-  }
-
-  .ask {
-    padding: 30px 22px;
   }
 
   .honest {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Phone from "../components/Phone";
-import WaitlistForm from "../components/WaitlistForm";
+import CallToAction from "../components/CallToAction";
 import { DEMOS } from "@/lib/apps";
 import { track } from "@/lib/analytics";
 import styles from "./examples.module.css";
@@ -69,15 +69,16 @@ export default function Examples() {
         </aside>
       </div>
 
-      <section className={styles.ask}>
-        <h2 className={styles.h2}>What would yours be?</h2>
-        <p className={styles.askSub}>
-          Tell us and we&rsquo;ll let you know when it opens.
-        </p>
-        <div className={styles.form}>
-          <WaitlistForm id="examples" page="mobile-examples" />
-        </div>
-      </section>
+      <div className={styles.ctaWrap}>
+        <CallToAction
+          id="examples"
+          page="mobile-examples"
+          tone="quiet"
+          title="What would yours be?"
+          sub="Every one of those started as a sentence. Tell us yours."
+        />
+      </div>
+
     </div>
   );
 }

@@ -296,36 +296,6 @@
   }
 }
 
-/* ---------- bottom ask ---------- */
-.ask2 {
-  margin-top: 64px;
-  background: var(--ink);
-  border-radius: var(--r-lg);
-  padding: 40px 34px;
-  color: #fff;
-}
-
-.h2 {
-  font-family: var(--display);
-  font-size: clamp(25px, 3.6vw, 34px);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.06;
-  margin: 0 0 10px;
-}
-
-.sub2 {
-  margin: 0 0 24px;
-  font-size: 16.5px;
-  font-weight: 500;
-  color: #a79fb6;
-  max-width: 40ch;
-}
-
-.form {
-  max-width: 420px;
-}
-
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
   .split {
@@ -373,4 +343,8 @@
     width: 280px;
     height: 280px;
   }
+}
+
+.ctaWrap {
+  margin-top: 60px;
 }

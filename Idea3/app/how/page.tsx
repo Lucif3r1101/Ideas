@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import WaitlistForm from "../components/WaitlistForm";
+import CallToAction from "../components/CallToAction";
 import styles from "./how.module.css";
 
 export const metadata: Metadata = {
@@ -137,19 +137,19 @@ export default function How() {
         </p>
       </section>
 
-      <section className={styles.ask}>
-        <h2 className={styles.h2Ask}>Want a look?</h2>
-        <p className={styles.askSub}>
-          <Link href="/playground" className={styles.inline}>
-            Try the playground
-          </Link>{" "}
-          first if you have not, then leave your email and tell us what
-          you&rsquo;d build.
-        </p>
-        <div className={styles.form}>
-          <WaitlistForm id="how" page="mobile-how" />
-        </div>
-      </section>
+      <CallToAction
+        id="how"
+        page="mobile-how"
+        tone="dark"
+        title="Want a look?"
+        sub={
+          <>
+            Try the playground first if you have not, then leave your email and
+            tell us what you would build.
+          </>
+        }
+      />
+
     </main>
   );
 }

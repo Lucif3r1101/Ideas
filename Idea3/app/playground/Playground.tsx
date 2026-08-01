@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Phone from "../components/Phone";
-import WaitlistForm from "../components/WaitlistForm";
+import CallToAction from "../components/CallToAction";
 import { DEMOS, type Demo } from "@/lib/apps";
 import { track } from "@/lib/analytics";
 import styles from "./playground.module.css";
@@ -132,16 +132,15 @@ export default function Playground() {
         </section>
       </div>
 
-      <section className={styles.ask2}>
-        <h2 className={styles.h2}>Want to build your own?</h2>
-        <p className={styles.sub2}>
-          Tell us what you&rsquo;d make first. We&rsquo;ll let you know when it
-          opens.
-        </p>
-        <div className={styles.form}>
-          <WaitlistForm id="playground" page="mobile-playground" />
-        </div>
-      </section>
+      <div className={styles.ctaWrap}>
+        <CallToAction
+          id="playground"
+          page="mobile-playground"
+          tone="dark"
+          title="Want to build your own?"
+          sub="That was three taps. The real thing takes whatever you type."
+        />
+      </div>
 
     </main>
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Phone from "./components/Phone";
-import TripApp from "./components/apps/TripApp";
 import WaitlistForm from "./components/WaitlistForm";
+import HeroStage from "./components/HeroStage";
+import CallToAction from "./components/CallToAction";
 import styles from "./page.module.css";
 
 const TRUTHS = [
@@ -55,15 +55,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className={styles.art}>
-            <div className={styles.glow} aria-hidden="true" />
-            <Phone>
-              <TripApp />
-            </Phone>
-            <p className={styles.artCaption}>
-              A real app with four screens. Tap the tabs.
-            </p>
-          </div>
+          <HeroStage />
         </div>
       </section>
 
@@ -89,17 +81,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.last}>
-        <div className={styles.lastInner}>
-          <h2 className={styles.h2Last}>What would you build first?</h2>
-          <p className={styles.lastSub}>
-            Tell us and we&rsquo;ll let you know the moment it opens.
-          </p>
-          <div className={styles.lastForm}>
-            <WaitlistForm id="bottom" page="mobile" />
-          </div>
-        </div>
-      </section>
+      <div className={styles.lastWrap}>
+        <CallToAction
+          id="bottom"
+          page="mobile"
+          tone="violet"
+          title="What would you build first?"
+          sub="Tell us and we'll let you know the moment it opens. One email, nothing else."
+        />
+      </div>
 
     </main>
   );
