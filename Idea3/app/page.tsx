@@ -30,18 +30,6 @@ const TRUTHS = [
 export default function Home() {
   return (
     <main>
-      <nav className={styles.nav}>
-        <div className={styles.navInner}>
-          <span className={styles.brand}>Thumb</span>
-          <Link href="/playground" className={styles.playBtn}>
-            Try it
-            <span className={styles.playArrow} aria-hidden="true">
-              →
-            </span>
-          </Link>
-        </div>
-      </nav>
-
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.copy}>

@@ -3,60 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Phone from "../components/Phone";
-import SplitBill from "../components/apps/SplitBill";
-import HabitTracker from "../components/apps/HabitTracker";
-import Countdown from "../components/apps/Countdown";
 import WaitlistForm from "../components/WaitlistForm";
+import { DEMOS, type Demo } from "@/lib/apps";
 import { track } from "@/lib/analytics";
 import styles from "./playground.module.css";
-
-type Build = {
-  id: string;
-  chip: string;
-  prompt: string;
-  file: string;
-  what: string;
-  app: () => React.ReactElement;
-};
-
-const BUILDS: Build[] = [
-  {
-    id: "split",
-    chip: "Split a bill",
-    prompt: "an app to split the bill with my friends, with tip",
-    file: "split.tsx",
-    what: "Change the total, the tip or the headcount. It recalculates as you go.",
-    app: () => <SplitBill />,
-  },
-  {
-    id: "habit",
-    chip: "Track a habit",
-    prompt: "something to track if i went to the gym this week",
-    file: "habit.tsx",
-    what: "Tap any day to tick it off. The streak and the bar both react.",
-    app: () => <HabitTracker />,
-  },
-  {
-    id: "count",
-    chip: "Count down",
-    prompt: "a countdown to my exam that updates every second",
-    file: "countdown.tsx",
-    what: "Watch the seconds. It is a real timer, not a picture of one.",
-    app: () => <Countdown />,
-  },
-];
 
 type Phase = "idle" | "typing" | "building" | "ready";
 
 export default function Playground() {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [build, setBuild] = useState<Build>(BUILDS[0]);
+  const [build, setBuild] = useState<Demo>(DEMOS[0]);
   const [typed, setTyped] = useState("");
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
-  function start(b: Build) {
+  function start(b: Demo) {
     timers.current.forEach(clearTimeout);
     timers.current = [];
     setBuild(b);
@@ -76,13 +38,6 @@ export default function Playground() {
 
   return (
     <main className={styles.page}>
-      <nav className={styles.nav}>
-        <Link href="/" className={styles.brand}>
-          Thumb
-        </Link>
-        <span className={styles.tag}>Playground</span>
-      </nav>
-
       <header className={styles.head}>
         <h1 className={styles.h1}>Try it here.</h1>
         <p className={styles.sub}>
@@ -97,7 +52,7 @@ export default function Playground() {
           <span className={styles.label}>1 · Ask for an app</span>
 
           <div className={styles.chips}>
-            {BUILDS.map((b) => (
+            {DEMOS.map((b) => (
               <button
                 key={b.id}
                 type="button"

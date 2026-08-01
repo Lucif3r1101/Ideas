@@ -162,7 +162,7 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: #2fe07e;
+  color: #b6f542;
   font-variant-numeric: tabular-nums;
 }
 
@@ -238,7 +238,7 @@
 }
 
 .dayOn .dayDot {
-  background: #2fe07e;
+  background: #b6f542;
 }
 
 .hint {
@@ -259,7 +259,7 @@
 
 .barFill {
   height: 100%;
-  background: #2fe07e;
+  background: #5b3df5;
   border-radius: 6px;
   transition: width 0.25s ease;
 }
@@ -293,7 +293,7 @@
   font-family: var(--display);
   font-size: 22px;
   font-weight: 800;
-  color: #2fe07e;
+  color: #b6f542;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -312,4 +312,319 @@
   font-weight: 700;
   color: #8b90a0;
   text-align: center;
+}
+
+/* ---------------- expenses ---------------- */
+.totalRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  background: #14161d;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.totalLabel {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #7f8598;
+}
+
+.totalVal {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #b6f542;
+  font-variant-numeric: tabular-nums;
+}
+
+.addRow {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.addWhat,
+.addAmt {
+  border: 2px solid #e4e7f0;
+  background: #fff;
+  border-radius: 11px;
+  padding: 10px 12px;
+  font-family: var(--body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #14161d;
+  min-width: 0;
+}
+
+.addWhat {
+  flex: 1;
+}
+
+.addAmt {
+  width: 68px;
+  flex: none;
+}
+
+.addWhat::placeholder,
+.addAmt::placeholder {
+  color: #a8adbb;
+  font-weight: 500;
+}
+
+.addBtn {
+  flex: none;
+  width: 42px;
+  border: 0;
+  border-radius: 11px;
+  background: #5b3df5;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.quick {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.quickChip {
+  border: 0;
+  background: #eceaf9;
+  color: #4b3fa0;
+  border-radius: 100px;
+  padding: 5px 11px;
+  font-family: var(--body);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #fff;
+  border: 2px solid #eef0f6;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.itemWhat {
+  flex: 1;
+  min-width: 0;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #14161d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemAmt {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #4b3fa0;
+  font-variant-numeric: tabular-nums;
+}
+
+.itemX {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f2f7;
+  color: #9099ad;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  padding: 22px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #a8adbb;
+}
+
+/* ---------------- pomodoro ---------------- */
+.ring {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin: 6px auto 20px;
+}
+
+.ringSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.ringMid {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ringTime {
+  font-family: var(--display);
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #14161d;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.ringSub {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8b90a0;
+}
+
+.timerBtns,
+.deckBtns {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.primaryBtn,
+.ghostBtn {
+  flex: 1;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 14px;
+  padding: 14px 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.primaryBtn {
+  background: #14161d;
+  color: #fff;
+}
+
+.ghostBtn {
+  background: #fff;
+  border-color: #e4e7f0;
+  color: #14161d;
+}
+
+.ghostBtn:active,
+.primaryBtn:active {
+  transform: translateY(2px);
+}
+
+/* ---------------- flashcards ---------------- */
+.deckTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.deckCount {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #5b3df5;
+  background: #eceaf9;
+  border-radius: 100px;
+  padding: 4px 12px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  min-height: 178px;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 900px;
+  font-family: var(--body);
+  margin-bottom: 10px;
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px;
+  border-radius: 18px;
+  background: #fff;
+  border: 2px solid #e4e7f0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #14161d;
+  text-align: left;
+  backface-visibility: hidden;
+  transition: transform 0.42s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+  background: #14161d;
+  border-color: #14161d;
+  color: #fff;
+}
+
+.cardFlipped .cardFace {
+  transform: rotateY(-180deg);
+}
+
+.cardFlipped .cardBack {
+  transform: rotateY(0deg);
+}
+
+.cardHint {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a8adbb;
+}
+
+.cardBack .cardHint {
+  color: #b6f542;
+}
+
+.tapHint {
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #a8adbb;
 }

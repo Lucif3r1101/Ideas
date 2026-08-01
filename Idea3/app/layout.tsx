@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import Analytics from "./components/Analytics";
+import SiteNav from "./components/SiteNav";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -30,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
+        <SiteNav />
         {children}
         <Suspense fallback={null}>
           <Analytics />
