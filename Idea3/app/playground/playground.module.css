@@ -220,8 +220,8 @@
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 340px;
-  height: 340px;
+  width: min(340px, 92vw);
+  height: min(340px, 92vw);
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -234,6 +234,9 @@
 }
 
 .preview > :global(div) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   position: relative;
   z-index: 1;
 }
@@ -340,8 +343,8 @@
   }
 
   .glow {
-    width: 280px;
-    height: 280px;
+    width: min(280px, 88vw);
+    height: min(280px, 88vw);
   }
 }
 

@@ -13,8 +13,8 @@
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  width: 520px;
-  height: 520px;
+  width: min(520px, 106vw);
+  height: min(520px, 106vw);
   pointer-events: none;
   background:
     radial-gradient(circle at 32% 28%, rgba(91, 61, 245, 0.26), transparent 58%),
@@ -129,6 +129,14 @@
   }
 }
 
+.capWide {
+  display: inline;
+}
+
+.capNarrow {
+  display: none;
+}
+
 @media (max-width: 620px) {
   /* the notes crowd a small screen, drop the outer two */
   .n1,
@@ -137,11 +145,12 @@
   }
 
   .n2 {
-    top: -6px;
+    top: -4px;
     right: auto;
     left: 50%;
     transform: translateX(-50%) translateY(10px) scale(0.94);
     border-radius: 14px;
+    font-size: 13px;
   }
 
   .n2.noteIn {
@@ -149,15 +158,47 @@
   }
 
   .stage {
-    padding-top: 34px;
+    padding-top: 32px;
+    width: 100%;
   }
 
+  /* no tilt once the frame is off, a tilted rectangle just looks broken */
   .tilt {
-    transform: rotate(-1.4deg);
+    transform: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    animation: settleFlat 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+  }
+
+  @keyframes settleFlat {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .mesh {
-    width: 380px;
-    height: 380px;
+    width: min(360px, 100vw);
+    height: min(360px, 100vw);
+    top: -10px;
+  }
+
+  .capWide {
+    display: none;
+  }
+
+  .capNarrow {
+    display: inline;
+  }
+
+  .caption {
+    font-size: 13px;
+    text-align: center;
+    padding: 0 12px;
   }
 }

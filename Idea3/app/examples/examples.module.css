@@ -145,8 +145,8 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 360px;
-  height: 360px;
+  width: min(360px, 92vw);
+  height: min(360px, 92vw);
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -159,6 +159,9 @@
 }
 
 .sticky > :global(div) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   position: relative;
   z-index: 1;
 }
@@ -210,8 +213,8 @@
   }
 
   .glow {
-    width: 290px;
-    height: 290px;
+    width: min(290px, 88vw);
+    height: min(290px, 88vw);
   }
 }
 

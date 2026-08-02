@@ -46,7 +46,12 @@ export default function HeroStage() {
 
       <p className={styles.caption}>
         <span className={styles.live} aria-hidden="true" />
-        Four screens, all working. Tap the tabs.
+        <span className={styles.capWide}>
+          Four screens, all working. Tap the tabs.
+        </span>
+        <span className={styles.capNarrow}>
+          Four screens, running on your phone right now. Tap the tabs.
+        </span>
       </p>
     </div>
   );
