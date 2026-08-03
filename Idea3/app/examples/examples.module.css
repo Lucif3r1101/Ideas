@@ -138,15 +138,16 @@
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  width: 100%;
 }
 
 .glow {
   position: absolute;
-  top: 20px;
+  top: 6%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(360px, 92vw);
-  height: min(360px, 92vw);
+  width: min(300px, 78%);
+  aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -226,8 +227,7 @@
   }
 
   .glow {
-    width: min(290px, 88vw);
-    height: min(290px, 88vw);
+    width: min(260px, 74%);
   }
 }
 

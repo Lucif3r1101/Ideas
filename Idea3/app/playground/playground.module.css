@@ -207,28 +207,36 @@
 }
 
 /* ---------- right, the phone ---------- */
+/*
+ * Column, not row. Without the direction the phone and the device picker
+ * were laid out side by side, which squeezed the phone to a sliver and left
+ * the glow floating on its own.
+ */
 .preview {
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   padding-top: 4px;
 }
 
-/* colour bloom behind the phone so it reads as lit */
+/* colour bloom sitting behind the phone, not adrift under it */
 .glow {
   position: absolute;
-  top: 40px;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  width: min(340px, 92vw);
-  height: min(340px, 92vw);
+  width: min(300px, 78%);
+  aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(91, 61, 245, 0.22) 0%,
-    rgba(255, 92, 57, 0.14) 45%,
+    rgba(91, 61, 245, 0.2) 0%,
+    rgba(255, 92, 57, 0.12) 45%,
     transparent 70%
   );
+  filter: blur(4px);
   pointer-events: none;
   z-index: 0;
 }
@@ -366,8 +374,7 @@
   }
 
   .glow {
-    width: min(280px, 88vw);
-    height: min(280px, 88vw);
+    width: min(260px, 74%);
   }
 }
 
@@ -376,7 +383,6 @@
 }
 
 .picker {
-  margin-top: 16px;
   position: relative;
   z-index: 2;
 }

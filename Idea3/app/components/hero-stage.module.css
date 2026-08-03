@@ -13,8 +13,8 @@
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(520px, 106vw);
-  height: min(520px, 106vw);
+  width: min(460px, 138%);
+  aspect-ratio: 1;
   pointer-events: none;
   background:
     radial-gradient(circle at 32% 28%, rgba(91, 61, 245, 0.26), transparent 58%),
@@ -183,9 +183,8 @@
   }
 
   .mesh {
-    width: min(360px, 100vw);
-    height: min(360px, 100vw);
-    top: -10px;
+    width: min(380px, 130%);
+    top: -6px;
   }
 
   .capWide {
