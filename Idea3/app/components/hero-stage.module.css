@@ -28,6 +28,8 @@
 .tilt {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 330px;
   transform: rotate(-2.4deg);
   animation: settle 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) both;
 }
@@ -162,23 +164,21 @@
     width: 100%;
   }
 
-  /* no tilt once the frame is off, a tilted rectangle just looks broken */
+  /* keep a gentle tilt, the frame stays on now so it still reads as a phone */
   .tilt {
-    transform: none;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    transform: rotate(-1.2deg);
+    max-width: 300px;
     animation: settleFlat 0.6s cubic-bezier(0.2, 0.8, 0.3, 1) both;
   }
 
   @keyframes settleFlat {
     from {
       opacity: 0;
-      transform: translateY(16px) scale(0.97);
+      transform: rotate(-3deg) translateY(16px) scale(0.97);
     }
     to {
       opacity: 1;
-      transform: none;
+      transform: rotate(-1.2deg);
     }
   }
 

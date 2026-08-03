@@ -1,97 +1,112 @@
-.shell {
+/*
+ * The outer box takes the scaled height so the page does not leave a gap
+ * under a transformed element. The shell inside is always drawn at the real
+ * device size and scaled from the top centre.
+ */
+.box {
   position: relative;
-  width: 300px;
-  height: 620px;
-  flex: none;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  transition: height 0.28s cubic-bezier(0.3, 0.8, 0.4, 1);
+}
+
+.shell {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: 0;
+  transform-origin: top center;
+  translate: -50% 0;
   background: #1b1e26;
-  border-radius: 46px;
-  padding: 11px;
   box-shadow:
     inset 0 0 0 2px #33384a,
-    0 24px 50px -18px rgba(0, 0, 0, 0.55),
-    0 2px 0 rgba(255, 255, 255, 0.06);
+    0 26px 54px -20px rgba(22, 18, 31, 0.5),
+    0 2px 0 rgba(255, 255, 255, 0.05);
+  transition:
+    width 0.28s cubic-bezier(0.3, 0.8, 0.4, 1),
+    height 0.28s cubic-bezier(0.3, 0.8, 0.4, 1),
+    border-radius 0.28s ease;
 }
 
-/* side buttons, they sell the illusion more than any bezel detail */
-.buttonsL,
-.buttonR {
+/* --- side buttons --- */
+.btnsL,
+.btnR {
   position: absolute;
   background: #2a2e3b;
-  border-radius: 3px;
 }
 
-.buttonsL {
+.btnsL {
   left: -3px;
-  top: 112px;
+  top: 15%;
   display: flex;
   flex-direction: column;
   gap: 14px;
   background: none;
 }
 
-.buttonsL i {
+.btnsL i {
   display: block;
   width: 3px;
   background: #2a2e3b;
   border-radius: 3px 0 0 3px;
 }
 
-.buttonsL i:nth-child(1) {
+.btnsL i:nth-child(1) {
   height: 26px;
 }
-.buttonsL i:nth-child(2),
-.buttonsL i:nth-child(3) {
+.btnsL i:nth-child(2),
+.btnsL i:nth-child(3) {
   height: 46px;
 }
 
-.buttonR {
+.btnR {
   right: -3px;
-  top: 168px;
+  top: 21%;
   width: 3px;
-  height: 66px;
+  height: 68px;
   border-radius: 0 3px 3px 0;
 }
 
+/* --- screen --- */
 .screen {
   position: relative;
   height: 100%;
-  border-radius: 36px;
   overflow: hidden;
   background: #f7f8fb;
   display: flex;
   flex-direction: column;
 }
 
-/* --- status bar --- */
 .status {
   position: relative;
   flex: none;
-  height: 42px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 22px;
+  padding: 0 24px;
   background: #f7f8fb;
   z-index: 2;
 }
 
 .time {
   font-family: var(--body);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   color: #14161d;
   font-variant-numeric: tabular-nums;
 }
 
-.notch {
+.island {
   position: absolute;
   left: 50%;
-  top: 8px;
+  top: 9px;
   transform: translateX(-50%);
-  width: 82px;
-  height: 24px;
+  width: 92px;
+  height: 27px;
   background: #14161d;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .icons {
@@ -108,21 +123,20 @@
 }
 
 .signal {
-  width: 15px;
-  height: 10px;
+  width: 16px;
+  height: 11px;
   clip-path: polygon(0 70%, 25% 70%, 25% 100%, 0 100%, 30% 45%, 55% 45%, 55% 100%, 30% 100%, 60% 20%, 85% 20%, 85% 100%, 60% 100%);
 }
 
 .wifi {
-  width: 13px;
-  height: 10px;
-  border-radius: 2px;
+  width: 14px;
+  height: 11px;
   clip-path: polygon(50% 100%, 0 30%, 20% 12%, 50% 0, 80% 12%, 100% 30%);
 }
 
 .battery {
-  width: 22px;
-  height: 11px;
+  width: 24px;
+  height: 12px;
   border-radius: 3px;
   position: relative;
 }
@@ -131,94 +145,48 @@
   content: "";
   position: absolute;
   right: -3px;
-  top: 3.5px;
+  top: 4px;
   width: 2px;
   height: 4px;
   background: #14161d;
   border-radius: 0 2px 2px 0;
 }
 
-/* --- app area --- */
 .content {
   flex: 1;
   min-height: 0;
   overflow: hidden;
 }
 
+/* --- home indicator, differs by handset --- */
 .homebar {
   flex: none;
-  height: 22px;
+  height: 26px;
   background: #f7f8fb;
-  position: relative;
+  display: grid;
+  place-items: center;
 }
 
-.homebar::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 7px;
-  transform: translateX(-50%);
-  width: 118px;
-  height: 4px;
+.homeLine {
+  width: 128px;
+  height: 5px;
   border-radius: 3px;
   background: #14161d;
   opacity: 0.24;
 }
 
-@media (max-width: 900px) {
-  .shell {
-    width: 288px;
-    height: 596px;
-  }
+/* the SE has a physical button, so it gets a chin instead */
+.homeBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(20, 22, 29, 0.18);
 }
 
-/*
- * On an actual phone, drawing a phone inside a phone is daft and eats half
- * the screen. Below 620px the chrome comes off, the app goes full width, and
- * the visitor is simply looking at the app on the device it was built for.
- */
-@media (max-width: 620px) {
-  .shell {
-    width: 100%;
-    max-width: 440px;
-    height: 458px;
-    padding: 0;
-    border-radius: 24px;
-    background: transparent;
-    box-shadow:
-      0 1px 0 rgba(22, 18, 31, 0.06),
-      0 16px 34px -18px rgba(22, 18, 31, 0.4);
-  }
-
-  .buttonsL,
-  .buttonR,
-  .notch {
-    display: none;
-  }
-
-  .screen {
-    border-radius: 24px;
-    border: 1px solid var(--line);
-  }
-
-  /* keep a slim status strip so it still reads as an app, not a web section */
-  .status {
-    height: 34px;
-    padding: 0 16px;
-  }
-
-  .homebar {
-    height: 14px;
-  }
-
-  .homebar::after {
-    width: 96px;
-    bottom: 5px;
-  }
+.box[data-device="se"] .homebar {
+  height: 52px;
 }
 
-@media (max-width: 400px) {
-  .shell {
-    height: 430px;
-  }
+.box[data-device="pixel"] .homeLine {
+  width: 108px;
 }

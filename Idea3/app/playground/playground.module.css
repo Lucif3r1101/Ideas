@@ -234,11 +234,9 @@
 }
 
 .preview > :global(div) {
-  width: 100%;
-  display: flex;
-  justify-content: center;
   position: relative;
   z-index: 1;
+  width: 100%;
 }
 
 .blank {
@@ -375,4 +373,10 @@
 
 .ctaWrap {
   margin-top: 60px;
+}
+
+.picker {
+  margin-top: 16px;
+  position: relative;
+  z-index: 2;
 }

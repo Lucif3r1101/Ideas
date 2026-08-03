@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Phone from "./Phone";
+import { deviceById } from "@/lib/devices";
 import TripApp from "./apps/TripApp";
 import styles from "./hero-stage.module.css";
 
@@ -39,19 +40,14 @@ export default function HeroStage() {
       ))}
 
       <div className={styles.tilt}>
-        <Phone>
+        <Phone device={deviceById("15")} maxHeight={560}>
           <TripApp />
         </Phone>
       </div>
 
       <p className={styles.caption}>
         <span className={styles.live} aria-hidden="true" />
-        <span className={styles.capWide}>
-          Four screens, all working. Tap the tabs.
-        </span>
-        <span className={styles.capNarrow}>
-          Four screens, running on your phone right now. Tap the tabs.
-        </span>
+        Four screens, all working. Tap the tabs.
       </p>
     </div>
   );

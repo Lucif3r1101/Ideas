@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import Phone from "../components/Phone";
+import DevicePicker from "../components/DevicePicker";
 import CallToAction from "../components/CallToAction";
 import { DEMOS, type Demo } from "@/lib/apps";
+import { DEFAULT_DEVICE, type Device } from "@/lib/devices";
 import { track } from "@/lib/analytics";
 import styles from "./playground.module.css";
 
@@ -13,6 +15,7 @@ export default function Playground() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [build, setBuild] = useState<Demo>(DEMOS[0]);
   const [typed, setTyped] = useState("");
+  const [device, setDevice] = useState<Device>(DEFAULT_DEVICE);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
@@ -102,7 +105,7 @@ export default function Playground() {
         {/* ------ right: the phone ------ */}
         <section className={styles.preview}>
           <div className={styles.glow} aria-hidden="true" />
-          <Phone>
+          <Phone device={device} maxHeight={620}>
             {phase === "ready" ? (
               build.app()
             ) : (
@@ -129,6 +132,9 @@ export default function Playground() {
               </div>
             )}
           </Phone>
+          <div className={styles.picker}>
+            <DevicePicker value={device} onChange={setDevice} />
+          </div>
         </section>
       </div>
 

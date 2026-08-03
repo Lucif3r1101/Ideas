@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import Phone from "../components/Phone";
+import DevicePicker from "../components/DevicePicker";
 import CallToAction from "../components/CallToAction";
 import { DEMOS } from "@/lib/apps";
+import { DEFAULT_DEVICE, type Device } from "@/lib/devices";
 import { track } from "@/lib/analytics";
 import styles from "./examples.module.css";
 
 export default function Examples() {
   const [open, setOpen] = useState(DEMOS[0].id);
+  const [device, setDevice] = useState<Device>(DEFAULT_DEVICE);
   const demo = DEMOS.find((d) => d.id === open) ?? DEMOS[0];
 
   function pick(id: string) {
@@ -63,7 +66,10 @@ export default function Examples() {
         <aside className={styles.phoneCol}>
           <div className={styles.sticky}>
             <div className={styles.glow} aria-hidden="true" />
-            <Phone>{demo.app()}</Phone>
+            <Phone device={device} maxHeight={600}>
+              {demo.app()}
+            </Phone>
+            <DevicePicker value={device} onChange={setDevice} />
             <p className={styles.caption}>{demo.what}</p>
           </div>
         </aside>
