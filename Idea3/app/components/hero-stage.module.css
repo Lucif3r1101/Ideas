@@ -7,23 +7,6 @@
   padding: 10px 0;
 }
 
-/* soft colour mesh, sits behind everything */
-.mesh {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(460px, 138%);
-  aspect-ratio: 1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(91, 61, 245, 0.26), transparent 58%),
-    radial-gradient(circle at 72% 62%, rgba(255, 92, 57, 0.2), transparent 55%),
-    radial-gradient(circle at 50% 88%, rgba(182, 245, 66, 0.22), transparent 52%);
-  filter: blur(6px);
-  z-index: 0;
-}
-
 /* the phone, slightly off axis so it feels held rather than placed */
 .tilt {
   position: relative;
@@ -182,10 +165,6 @@
     }
   }
 
-  .mesh {
-    width: min(380px, 130%);
-    top: -6px;
-  }
 
   .capWide {
     display: none;

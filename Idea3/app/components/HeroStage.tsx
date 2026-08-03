@@ -25,8 +25,6 @@ export default function HeroStage() {
 
   return (
     <div className={styles.stage}>
-      <div className={styles.mesh} aria-hidden="true" />
-
       {NOTES.map((n, i) => (
         <span
           key={n.cls}

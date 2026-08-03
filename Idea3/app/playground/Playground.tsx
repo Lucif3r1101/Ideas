@@ -104,7 +104,6 @@ export default function Playground() {
 
         {/* ------ right: the phone ------ */}
         <section className={styles.preview}>
-          <div className={styles.glow} aria-hidden="true" />
           <Phone device={device} maxHeight={620}>
             {phase === "ready" ? (
               build.app()

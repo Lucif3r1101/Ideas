@@ -44,8 +44,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  /* decorative glows are wider than their container by design, they must
-     never be able to create a sideways scroll on a narrow screen */
+  /* nothing should ever be able to create a sideways scroll */
   overflow-x: hidden;
 }
 

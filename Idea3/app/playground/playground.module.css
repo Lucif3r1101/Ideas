@@ -209,8 +209,7 @@
 /* ---------- right, the phone ---------- */
 /*
  * Column, not row. Without the direction the phone and the device picker
- * were laid out side by side, which squeezed the phone to a sliver and left
- * the glow floating on its own.
+ * were laid out side by side, which squeezed the phone to a sliver.
  */
 .preview {
   position: relative;
@@ -219,26 +218,6 @@
   align-items: center;
   gap: 16px;
   padding-top: 4px;
-}
-
-/* colour bloom sitting behind the phone, not adrift under it */
-.glow {
-  position: absolute;
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(300px, 78%);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(91, 61, 245, 0.2) 0%,
-    rgba(255, 92, 57, 0.12) 45%,
-    transparent 70%
-  );
-  filter: blur(4px);
-  pointer-events: none;
-  z-index: 0;
 }
 
 .preview > :global(div) {
@@ -373,9 +352,6 @@
     margin-top: 48px;
   }
 
-  .glow {
-    width: min(260px, 74%);
-  }
 }
 
 .ctaWrap {

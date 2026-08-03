@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { DEFAULT_DEVICE, type Device } from "@/lib/devices";
 import styles from "./phone.module.css";
 
@@ -30,7 +30,9 @@ export default function Phone({
   const outerW = device.w + device.bezel * 2;
   const outerH = device.h + device.bezel * 2;
 
-  useEffect(() => {
+  // layout effect, not effect: the box reserves height from the scale, so
+  // measuring after paint would show a full height device box for a frame
+  useLayoutEffect(() => {
     const el = box.current;
     if (!el) return;
 

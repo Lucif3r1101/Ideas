@@ -65,7 +65,6 @@ export default function Examples() {
 
         <aside className={styles.phoneCol}>
           <div className={styles.sticky}>
-            <div className={styles.glow} aria-hidden="true" />
             <Phone device={device} maxHeight={600}>
               {demo.app()}
             </Phone>
