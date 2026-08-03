@@ -50,6 +50,9 @@ export async function track(name: string, params: Record<string, unknown> = {}) 
     const attr = attribution();
     logEvent(a, name, {
       ...params,
+      // both ideas share one GA4 stream, and they share path names like
+      // /playground, so without this the events cannot be told apart
+      app: process.env.NEXT_PUBLIC_APP_ID,
       source: attr.source,
       channel: attr.channel,
       campaign: attr.utm_campaign || undefined,

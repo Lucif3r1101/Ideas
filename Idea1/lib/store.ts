@@ -49,7 +49,7 @@ export type Hit = {
  * they already gave us.
  */
 export async function saveSignup(row: Signup): Promise<{ isNew: boolean }> {
-  const ref = db().collection(SIGNUPS).doc(row.email);
+  const ref = db().collection(SIGNUPS()).doc(row.email);
   const snap = await ref.get();
 
   if (!snap.exists) {
@@ -107,7 +107,7 @@ export async function saveSignup(row: Signup): Promise<{ isNew: boolean }> {
  */
 export async function saveHit(hit: Hit) {
   await db()
-    .collection(HITS)
+    .collection(HITS())
     .add({ ...hit, created_at: FieldValue.serverTimestamp() });
 }
 
@@ -123,11 +123,11 @@ export async function summary(page?: string): Promise<Summary> {
   const store = db();
 
   const signupQ = page
-    ? store.collection(SIGNUPS).where("page", "==", page)
-    : store.collection(SIGNUPS);
+    ? store.collection(SIGNUPS()).where("page", "==", page)
+    : store.collection(SIGNUPS());
   const signupSnap = await signupQ.get();
 
-  const hitSnap = await store.collection(HITS).count().get();
+  const hitSnap = await store.collection(HITS()).count().get();
   const hits = hitSnap.data().count;
   const signups = signupSnap.size;
   const answered = signupSnap.docs.filter(

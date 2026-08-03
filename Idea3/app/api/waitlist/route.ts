@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       answer,
       answer_len: answer.length,
 
-      page: str(payload.page, 60) || "kids",
+      page: str(payload.page, 60) || "mobile",
       landing_page: str(payload.landing_page, 200) || "/",
       signup_path: str(payload.signup_path, 200) || "/",
 

@@ -27,5 +27,25 @@ export function db() {
   return getFirestore(app());
 }
 
-export const SIGNUPS = "signups";
-export const HITS = "hits";
+/**
+ * Every idea gets its own collections, so the same person signing up to two
+ * ideas is two independent signups rather than one document quietly winning
+ * on first touch. It also keeps `hits` separate, which matters because hits
+ * is the denominator for conversion.
+ *
+ * Deliberately no default. A missing APP_ID would silently merge two ideas
+ * into one pile, which is the exact bug this is here to prevent, and it would
+ * only show up weeks later as numbers that cannot be trusted.
+ */
+function appId() {
+  const id = process.env.APP_ID;
+  if (!id) {
+    throw new Error(
+      "APP_ID is missing. Set it to the idea this deployment serves, e.g. APP_ID=kids."
+    );
+  }
+  return id;
+}
+
+export const SIGNUPS = () => `signups_${appId()}`;
+export const HITS = () => `hits_${appId()}`;
