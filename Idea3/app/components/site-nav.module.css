@@ -83,34 +83,40 @@
   font-size: 13px;
 }
 
+/*
+ * On a phone the nav was a brand row plus a wrapped scrolling strip of
+ * links, about 90px of permanently sticky chrome on a 667px screen. It is
+ * now one compact row. The Try it button goes, because every page already
+ * ends in a form and the links still reach the playground.
+ */
 @media (max-width: 720px) {
   .inner {
-    gap: 12px;
-    padding: 11px var(--gutter);
+    gap: 10px;
+    padding: 9px var(--gutter);
   }
 
-  /* on a phone the links wrap to a scrollable row under the brand */
+  .brand {
+    font-size: 19px;
+  }
+
   .links {
-    order: 3;
-    width: 100%;
-    margin-left: 0;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    scrollbar-width: none;
-  }
-
-  .links::-webkit-scrollbar {
-    display: none;
+    margin-left: auto;
+    gap: 2px;
   }
 
   .link {
-    white-space: nowrap;
-    padding: 6px 11px;
-    font-size: 14px;
+    padding: 6px 9px;
+    font-size: 13.5px;
   }
 
   .cta {
-    font-size: 14px;
-    padding: 8px 14px;
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .link {
+    padding: 6px 7px;
+    font-size: 12.5px;
   }
 }

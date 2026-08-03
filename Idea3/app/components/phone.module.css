@@ -180,8 +180,8 @@
 @media (max-width: 620px) {
   .shell {
     width: 100%;
-    max-width: 460px;
-    height: 552px;
+    max-width: 440px;
+    height: 458px;
     padding: 0;
     border-radius: 24px;
     background: transparent;
@@ -219,6 +219,6 @@
 
 @media (max-width: 400px) {
   .shell {
-    height: 512px;
+    height: 430px;
   }
 }

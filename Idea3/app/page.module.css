@@ -4,14 +4,37 @@
   overflow: hidden;
 }
 
+/*
+ * Three blocks, laid out with named areas so the order can change on a
+ * phone without touching the markup. On a laptop the copy and the form
+ * stack on the left with the phone beside them. On a phone the phone slots
+ * between the two, so you read what it is, see it, then sign up.
+ */
 .heroInner {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 58px var(--gutter) 64px;
+  padding: 52px var(--gutter) 60px;
   display: grid;
   grid-template-columns: 1fr 330px;
-  gap: 48px;
-  align-items: center;
+  grid-template-areas:
+    "copy stage"
+    "actions stage";
+  gap: 26px 48px;
+  align-items: start;
+}
+
+.copy {
+  grid-area: copy;
+  align-self: end;
+}
+
+.stage {
+  grid-area: stage;
+  align-self: center;
+}
+
+.actions {
+  grid-area: actions;
 }
 
 .eyebrow {
@@ -157,17 +180,49 @@
 @media (max-width: 900px) {
   .heroInner {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 40px var(--gutter) 48px;
+    grid-template-areas:
+      "copy"
+      "stage"
+      "actions";
+    gap: 22px;
+    padding: 32px var(--gutter) 44px;
   }
 
-  .heroInner > :global(div:last-child) {
-    order: -1;
+  .copy,
+  .stage {
+    align-self: auto;
   }
 
   .lede,
   .form {
     max-width: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .heroInner {
+    padding: 24px var(--gutter) 36px;
+    gap: 18px;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .h1 {
+    font-size: 34px;
+    line-height: 1.04;
+    margin-bottom: 14px;
+  }
+
+  /* the two line break reads badly once the column is narrow */
+  .h1 br {
+    display: none;
+  }
+
+  .lede {
+    font-size: 16.5px;
+    margin-bottom: 0;
   }
 }
 

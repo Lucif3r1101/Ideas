@@ -44,18 +44,20 @@ export default function Home() {
               else. So make it on the phone. Say what you want, watch it appear,
               use it straight away.
             </p>
-
-            <div className={styles.actions}>
-              <div className={styles.form}>
-                <WaitlistForm id="top" page="mobile" />
-              </div>
-              <Link href="/playground" className={styles.tryLink}>
-                or try one now
-              </Link>
-            </div>
           </div>
 
-          <HeroStage />
+          <div className={styles.stage}>
+            <HeroStage />
+          </div>
+
+          <div className={styles.actions}>
+            <div className={styles.form}>
+              <WaitlistForm id="top" page="mobile" />
+            </div>
+            <Link href="/playground" className={styles.tryLink}>
+              or try one now
+            </Link>
+          </div>
         </div>
       </section>
 

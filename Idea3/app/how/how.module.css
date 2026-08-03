@@ -205,13 +205,41 @@
   max-width: 62ch;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 620px) {
   .head {
-    padding: 30px 0 26px;
+    padding: 24px 0 22px;
   }
 
   .h1 {
-    font-size: 33px;
+    font-size: 31px;
+  }
+
+  .sub {
+    font-size: 16.5px;
+  }
+
+  .steps,
+  .stack {
+    padding-bottom: 38px;
+  }
+
+  .qa {
+    padding-bottom: 34px;
+  }
+
+  .pre {
+    font-size: 12px;
+    padding: 13px;
+  }
+
+  .honest {
+    margin-bottom: 38px;
+  }
+}
+
+@media (max-width: 560px) {
+  .h1 {
+    font-size: 31px;
   }
 
   .honest {

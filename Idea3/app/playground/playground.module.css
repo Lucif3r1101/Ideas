@@ -316,10 +316,35 @@
   }
 }
 
-@media (max-width: 560px) {
-  .h1 {
-    font-size: 34px;
+@media (max-width: 620px) {
+  .head {
+    padding: 22px 0 18px;
   }
+
+  .h1 {
+    font-size: 31px;
+  }
+
+  .sub {
+    font-size: 16px;
+  }
+
+  /* chips are the first thing to reach for, keep them above the fold */
+  .split {
+    gap: 22px;
+  }
+
+  .composer {
+    padding: 11px 11px 11px 14px;
+  }
+
+  .built {
+    margin-top: 20px;
+    padding-top: 18px;
+  }
+}
+
+@media (max-width: 560px) {
 
   .sub {
     font-size: 16.5px;
